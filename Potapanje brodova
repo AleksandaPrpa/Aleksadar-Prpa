@@ -61,7 +61,7 @@ int main()
     pravila();
     getch();
     system("cls");
-    int i, j,br3; // brojaci
+    int i, j,br3,br2; // brojaci
     int x=344-1;
     int red1,red2,kolona1,kolona2;
     int potez = 0, rezultat = 0;
@@ -70,7 +70,7 @@ int main()
     char ime_prvi_igrac[9999];
     char ime_drugi_igrac[99999];
     char polje1[2], polje2[2];
-    /*printf("Unesi ime prvog igraca: ");
+    /*printf("Unesi ime prvog igraca: ");///////////////////////////////////////////////////////////////////
     gets(ime_prvi_igrac);
     printf("\nUnesi ime drugog igraca: ");
     gets(ime_drugi_igrac);
@@ -363,7 +363,14 @@ int main()
             printf("%d %c %c %c %c %c %c %c %c %c %c\n",10,prvi_igrac[10][1],prvi_igrac[10][2],prvi_igrac[10][3],prvi_igrac[10][4],prvi_igrac[10][5],prvi_igrac[10][6],prvi_igrac[10][7],prvi_igrac[10][8],prvi_igrac[10][9],prvi_igrac[10][10]);
         }
     }
-    while (rezultat == 0)
+    //brod duzine 2
+    {
+    	for(br2=0;br<3;br++)
+    	{
+    		
+		}
+	}
+	while (rezultat == 0)
     {
         if (potez % 2 == 0)
         {
