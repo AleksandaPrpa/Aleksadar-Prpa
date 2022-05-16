@@ -3,6 +3,20 @@
 #include <string.h>
 #include <conio.h>
 #include <math.h>
+void isaisdas(int n,int m,int prvi_igrac[n][m])
+{
+    printf("%c  %d %d %d %d %d %d %d %d %d %d\n",0,1,2,3,4,5,6,7,8,9,10);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",1,prvi_igrac[1][1],prvi_igrac[1][2],prvi_igrac[1][3],prvi_igrac[1][4],prvi_igrac[1][5],prvi_igrac[1][6],prvi_igrac[1][7],prvi_igrac[1][8],prvi_igrac[1][9],prvi_igrac[1][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",2,prvi_igrac[2][1],prvi_igrac[2][2],prvi_igrac[2][3],prvi_igrac[2][4],prvi_igrac[2][5],prvi_igrac[2][6],prvi_igrac[2][7],prvi_igrac[2][8],prvi_igrac[2][9],prvi_igrac[2][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",3,prvi_igrac[3][1],prvi_igrac[3][2],prvi_igrac[3][3],prvi_igrac[3][4],prvi_igrac[3][5],prvi_igrac[3][6],prvi_igrac[3][7],prvi_igrac[3][8],prvi_igrac[3][9],prvi_igrac[3][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",4,prvi_igrac[4][1],prvi_igrac[4][2],prvi_igrac[4][3],prvi_igrac[4][4],prvi_igrac[4][5],prvi_igrac[4][6],prvi_igrac[4][7],prvi_igrac[4][8],prvi_igrac[4][9],prvi_igrac[4][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",5,prvi_igrac[5][1],prvi_igrac[5][2],prvi_igrac[5][3],prvi_igrac[5][4],prvi_igrac[5][5],prvi_igrac[5][6],prvi_igrac[5][7],prvi_igrac[5][8],prvi_igrac[5][9],prvi_igrac[5][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",6,prvi_igrac[6][1],prvi_igrac[6][2],prvi_igrac[6][3],prvi_igrac[6][4],prvi_igrac[6][5],prvi_igrac[6][6],prvi_igrac[6][7],prvi_igrac[6][8],prvi_igrac[6][9],prvi_igrac[6][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",7,prvi_igrac[7][1],prvi_igrac[7][2],prvi_igrac[7][3],prvi_igrac[7][4],prvi_igrac[7][5],prvi_igrac[7][6],prvi_igrac[7][7],prvi_igrac[7][8],prvi_igrac[7][9],prvi_igrac[7][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",8,prvi_igrac[8][1],prvi_igrac[8][2],prvi_igrac[8][3],prvi_igrac[8][4],prvi_igrac[8][5],prvi_igrac[8][6],prvi_igrac[8][7],prvi_igrac[8][8],prvi_igrac[8][9],prvi_igrac[8][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n",9,prvi_igrac[9][1],prvi_igrac[9][2],prvi_igrac[9][3],prvi_igrac[9][4],prvi_igrac[9][5],prvi_igrac[9][6],prvi_igrac[9][7],prvi_igrac[9][8],prvi_igrac[9][9],prvi_igrac[9][10]);
+    printf("%d %c %c %c %c %c %c %c %c %c %c\n",10,prvi_igrac[10][1],prvi_igrac[10][2],prvi_igrac[10][3],prvi_igrac[10][4],prvi_igrac[10][5],prvi_igrac[10][6],prvi_igrac[10][7],prvi_igrac[10][8],prvi_igrac[10][9],prvi_igrac[10][10]);
+}
 void ispis_table()
 {
     int tabla[11][11];
@@ -27,17 +41,17 @@ void ispis_table()
     tabla[8][0] = 8;
     tabla[9][0] = 9;
     tabla[10][0] = 10;
-    printf("%c    %d %d %d %d %d %d %d %d %d %d\n", 0, tabla[0][1], tabla[0][2], tabla[0][3], tabla[0][4], tabla[0][5], tabla[0][6], tabla[0][7], tabla[0][8], tabla[0][9], tabla[0][10]);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[1][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[2][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[3][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[4][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[5][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[6][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[7][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[8][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d | %c %c %c %c %c %c %c %c %c %c\n", tabla[9][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
-    printf("%d| %c %c %c %c %c %c %c %c %c %c\n", tabla[10][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%c  %d %d %d %d %d %d %d %d %d %d\n", 0, tabla[0][1], tabla[0][2], tabla[0][3], tabla[0][4], tabla[0][5], tabla[0][6], tabla[0][7], tabla[0][8], tabla[0][9], tabla[0][10]);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[1][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[2][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[3][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[4][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[5][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[6][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[7][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[8][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[9][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
+    printf("%d %c %c %c %c %c %c %c %c %c %c\n", tabla[10][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
 }
 void pravila()
 {
@@ -57,34 +71,10 @@ int unos_polja()
     }
     return x;
 }
-int main()
+int unos_brodova(int n,int m,int prvi_igrac[n][m])
 {
-    pravila();
-    getch();
-    system("cls");
     int i, j,br3,br2,br1; // brojaci
-    int x=344-1;
     int red1,red2,kolona1,kolona2;
-    int potez = 0, rezultat = 0;
-    int prvi_igrac[12][12];
-    int drugi_igrac[12][12];
-    char ime_prvi_igrac[9999];
-    char ime_drugi_igrac[99999];
-    char polje1[2], polje2[2];
-    /*printf("Unesi ime prvog igraca: ");///////////////////////////////////////////////////////////////////
-    gets(ime_prvi_igrac);
-    printf("\nUnesi ime drugog igraca: ");
-    gets(ime_drugi_igrac);
-    printf("%s namesta brodove\n", ime_prvi_igrac);*/
-    ispis_table();
-    for(i=0;i<12;i++)
-    {
-        for(j=0;j<12;j++)
-        {
-            prvi_igrac[i][j]=88;//
-            drugi_igrac[i][j]=88;
-        }
-    }
     /*prvi_igrac[0][1] = 1;
     prvi_igrac[0][2] = 2;
     prvi_igrac[0][3] = 3;
@@ -584,11 +574,72 @@ int main()
             printf("%d %c %c %c %c %c %c %c %c %c %c\n",10,prvi_igrac[10][1],prvi_igrac[10][2],prvi_igrac[10][3],prvi_igrac[10][4],prvi_igrac[10][5],prvi_igrac[10][6],prvi_igrac[10][7],prvi_igrac[10][8],prvi_igrac[10][9],prvi_igrac[10][10]);
         }
     }
+}
+/*int provera(int n,int m,int prvi_igrac[n][m],int drugi_igrac[n][m],int prvi_igrac_sakriveno[n][m],int drugi_igrac_sakriveno[n][m])
+{
+
+}*/
+int main()
+{
+    pravila();
+    getch();
+    system("cls");
+    int i, j; // brojaci
+    int n=12,m=12;
+    int potez = 0, rezultat = 0;
+    int red1,kolona1;
+    int prvi_igrac[n][m];
+    int drugi_igrac[n][m];
+    int prvi_igrac_sakriveno[n][m];
+    int drugi_igrac_sakriveno[n][m];
+    char ime_prvi_igrac[9999];
+    char ime_drugi_igrac[99999];
+//  char polje1[2], polje2[2];
+    /*printf("Unesi ime prvog igraca: ");///////////////////////////////////////////////////////////////////
+    gets(ime_prvi_igrac);
+    printf("\nUnesi ime drugog igraca: ");
+    gets(ime_drugi_igrac);
+    printf("%s namesta brodove\n", ime_prvi_igrac);*/
+    ispis_table();
+    for(i=0;i<12;i++)
+    {
+        for(j=0;j<12;j++)
+        {
+            prvi_igrac[i][j]=88;//
+            drugi_igrac[i][j]=88;
+            prvi_igrac_sakriveno[i][j]=88;
+            drugi_igrac_sakriveno[i][j]=88;
+        }
+    }
+    printf("%s namesta brodove\n", ime_prvi_igrac);
+    unos_brodova(n,m,prvi_igrac);
+    printf("Pritisni bilo koje dugme da sledeci igrac namesta brodove.\n");
+    getch();
+    system("cls");
+    printf("%s namesta brodove\n", ime_drugi_igrac);
+    unos_brodova(n,m,drugi_igrac);
+    printf("Pritisni bilo koje dugme da nastavis.\n");
+    getch();
+    system("cls");
 	while (rezultat == 0)
     {
         if (potez % 2 == 0)
         {
             printf("%s igra\n", ime_prvi_igrac);
+            isaisdas(n,m,drugi_igrac_sakriveno);
+            red1=unos_polja();
+            kolona1=unos_polja();
+            if(drugi_igrac[red1][kolona1]!=88)
+            {
+                system("cls");
+                printf("Pogodak\n");
+                potez++;
+                drugi_igrac_sakriveno[red1][kolona1]=79;
+            }
+            else
+            {
+                drugi_igrac_sakriveno[red1][kolona1]=79;
+            }
         }
         else
         {
