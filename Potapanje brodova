@@ -225,6 +225,7 @@ void bot()
     getch();
     system("cls");
     unos_brodova_bot(n,m,bot);
+    system("cls");
 	while (rezultat == 0)
     {
         if (potez % 2 == 0)
@@ -247,11 +248,13 @@ void bot()
             default:
                 break;
             }
+            system("cls");
+            isaisdas(n,m,bot_sakriveno);
             if(potop1==10)
             {
                 rezultat++;
                 printf("%s je pobednik\nPostava brodova od %s je\n", ime_prvi_igrac,ime_prvi_igrac);
-                isaisdas(n,m,prvi_igrac);
+                isaisdas(n,m,prvi_igrac_sakriveno);
             }
         }
         else
@@ -265,14 +268,18 @@ void bot()
                 break;
             case 1:
                 potez++;
+                getch();
                 break;
             case 2:
                 potez++;
                 potop2++;
+                getch();
                 break;
             default:
                 break;
             }
+            system("cls");
+            isaisdas(n,m,prvi_igrac_sakriveno);
             if(potop2==10)
             {
                 rezultat++;
@@ -803,9 +810,787 @@ void bot_brod_4(int n,int m,int bot[n][m])
         }
     }
 }
-int provera_bot(int n,int m,int prvi_igrac[n][m],int prvi_igrac_sakriveno[n][m])
+int provera_bot(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m])
 {
-    
+    int y,potop1,red1,kolona1,potez;
+    p:
+    isaisdas(n,m,drugi_igrac_sakriveno);
+    srand(time(NULL));
+    red1=rand()%10+1;
+    kolona1=rand()%10+1;
+    if(drugi_igrac[red1][kolona1]==79 || drugi_igrac[red1][kolona1]==335)
+    {
+        system("cls");
+        goto p;
+    }
+    if(drugi_igrac[red1][kolona1]!=88)
+    {
+                system("cls");
+                potez++;
+                drugi_igrac_sakriveno[red1][kolona1]=79;
+                drugi_igrac[red1][kolona1]=335;
+                if(drugi_igrac[red1-1][kolona1-1]!=30 && drugi_igrac[red1-1][kolona1]!=30 && drugi_igrac[red1-1][kolona1+1]!=30 && drugi_igrac[red1][kolona1-1]!=30 && drugi_igrac[red1][kolona1+1]!=30 && drugi_igrac[red1+1][kolona1-1]!=30 && drugi_igrac[red1+1][kolona1]!=30 && drugi_igrac[red1+1][kolona1+1]!=30)
+                {
+                    if(drugi_igrac[red1-1][kolona1-1]!=17 && drugi_igrac[red1-1][kolona1]!=17 && drugi_igrac[red1-1][kolona1+1]!=17 && drugi_igrac[red1][kolona1-1]!=17 && drugi_igrac[red1][kolona1+1]!=17 && drugi_igrac[red1+1][kolona1-1]!=17 && drugi_igrac[red1+1][kolona1]!=17 && drugi_igrac[red1+1][kolona1+1]!=17)
+                    {
+                        if(drugi_igrac[red1-1][kolona1-1]!=254 && drugi_igrac[red1-1][kolona1]!=254 && drugi_igrac[red1-1][kolona1+1]!=254 && drugi_igrac[red1][kolona1-1]!=254 && drugi_igrac[red1][kolona1+1]!=254 && drugi_igrac[red1+1][kolona1-1]!=254 && drugi_igrac[red1+1][kolona1]!=254 && drugi_igrac[red1+1][kolona1+1]!=254)
+                        {
+                            y=1;
+                            system("cls");
+                            potop1++;
+                            if(drugi_igrac[red1][kolona1-1]==335 || drugi_igrac[red1][kolona1+1]==335)
+                            {
+                                if(drugi_igrac[red1][kolona1-1]==335)
+                                {
+                                    y++;
+                                    if(drugi_igrac[red1][kolona1-2]==335)
+                                    {
+                                        y++;
+                                        if(drugi_igrac[red1][kolona1-3]==335)
+                                        {
+                                            y++;
+                                            drugi_igrac[red1+1][kolona1-4]=79;
+                                            drugi_igrac[red1+1][kolona1-3]=79;
+                                            drugi_igrac[red1+1][kolona1-2]=79;
+                                            drugi_igrac[red1+1][kolona1-1]=79;
+                                            drugi_igrac[red1+1][kolona1]=79;
+                                            drugi_igrac[red1+1][kolona1+1]=79;
+
+                                            drugi_igrac[red1][kolona1-4]=79;
+                                            drugi_igrac[red1][kolona1+1]=79;
+
+                                            drugi_igrac[red1-1][kolona1-4]=79;
+                                            drugi_igrac[red1-1][kolona1-3]=79;
+                                            drugi_igrac[red1-1][kolona1-2]=79;
+                                            drugi_igrac[red1-1][kolona1-1]=79;
+                                            drugi_igrac[red1-1][kolona1]=79;
+                                            drugi_igrac[red1-1][kolona1+1]=79;
+                                            
+                                            drugi_igrac_sakriveno[red1+1][kolona1-4]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1-3]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1-2]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+
+                                            drugi_igrac_sakriveno[red1][kolona1-4]=79;
+                                            drugi_igrac_sakriveno[red1][kolona1+1]=79;
+
+                                            drugi_igrac_sakriveno[red1-1][kolona1-4]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1-3]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1-2]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                        }
+                                        else
+                                        {
+                                            if(drugi_igrac[red1][kolona1+1]==335)
+                                            {
+                                                y++;
+                                                drugi_igrac[red1+1][kolona1-3]=79;
+                                                drugi_igrac[red1+1][kolona1-2]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+                                                drugi_igrac[red1+1][kolona1]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+                                                drugi_igrac[red1+1][kolona1+2]=79;
+
+                                                drugi_igrac[red1][kolona1-3]=79;
+                                                drugi_igrac[red1][kolona1+2]=79;
+
+                                                drugi_igrac[red1-1][kolona1-3]=79;
+                                                drugi_igrac[red1-1][kolona1-2]=79;
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+                                                drugi_igrac[red1-1][kolona1]=79;
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+                                                drugi_igrac[red1-1][kolona1+2]=79;
+
+                                                drugi_igrac_sakriveno[red1+1][kolona1-3]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+2]=79;
+
+                                                drugi_igrac_sakriveno[red1][kolona1-3]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1+2]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1-3]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+2]=79;
+                                            }
+                                            else
+                                            {
+                                                drugi_igrac[red1+1][kolona1-3]=79;
+                                                drugi_igrac[red1+1][kolona1-2]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+                                                drugi_igrac[red1+1][kolona1]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+
+                                                drugi_igrac[red1][kolona1-3]=79;
+                                                drugi_igrac[red1][kolona1+1]=79;
+
+                                                drugi_igrac[red1-1][kolona1-3]=79;
+                                                drugi_igrac[red1-1][kolona1-2]=79;
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+                                                drugi_igrac[red1-1][kolona1]=79;
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+
+                                                drugi_igrac_sakriveno[red1+1][kolona1-3]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+
+                                                drugi_igrac_sakriveno[red1][kolona1-3]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1+1]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1-3]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                       if(drugi_igrac[red1][kolona1+1]==335)
+                                        {
+                                            y++;
+                                            if(drugi_igrac[red1][kolona1+2]==335)
+                                            {
+                                                y++;
+                                                drugi_igrac[red1+1][kolona1-2]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+                                                drugi_igrac[red1+1][kolona1]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+                                                drugi_igrac[red1+1][kolona1+2]=79;
+                                                drugi_igrac[red1+1][kolona1+3]=79;
+
+                                                drugi_igrac[red1][kolona1-2]=79;
+                                                drugi_igrac[red1][kolona1+3]=79;
+
+                                                drugi_igrac[red1-1][kolona1-2]=79;
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+                                                drugi_igrac[red1-1][kolona1]=79;
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+                                                drugi_igrac[red1-1][kolona1+2]=79;
+                                                drugi_igrac[red1-1][kolona1+3]=79;
+
+                                                drugi_igrac_sakriveno[red1+1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+2]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+3]=79;
+
+                                                drugi_igrac_sakriveno[red1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1+3]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+2]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+3]=79;
+                                            }
+                                            else
+                                            {
+                                                drugi_igrac[red1+1][kolona1-2]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+                                                drugi_igrac[red1+1][kolona1]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+                                                drugi_igrac[red1+1][kolona1+2]=79;
+
+                                                drugi_igrac[red1][kolona1-2]=79;
+                                                drugi_igrac[red1][kolona1+2]=79;
+
+                                                drugi_igrac[red1-1][kolona1-2]=79;
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+                                                drugi_igrac[red1-1][kolona1]=79;
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+                                                drugi_igrac[red1-1][kolona1+2]=79;
+
+                                                drugi_igrac_sakriveno[red1+1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+2]=79;
+
+                                                drugi_igrac_sakriveno[red1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1+2]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1-2]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+2]=79;
+                                            }
+                                        } 
+                                        else
+                                        {
+                                            drugi_igrac[red1+1][kolona1-2]=79;
+                                            drugi_igrac[red1+1][kolona1-1]=79;
+                                            drugi_igrac[red1+1][kolona1]=79;
+                                            drugi_igrac[red1+1][kolona1+1]=79;
+
+                                            drugi_igrac[red1][kolona1-2]=79;
+                                            drugi_igrac[red1][kolona1+1]=79;
+
+                                            drugi_igrac[red1-1][kolona1-2]=79;
+                                            drugi_igrac[red1-1][kolona1-1]=79;
+                                            drugi_igrac[red1-1][kolona1]=79;
+                                            drugi_igrac[red1-1][kolona1+1]=79;
+
+                                            drugi_igrac_sakriveno[red1+1][kolona1-2]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+
+                                            drugi_igrac_sakriveno[red1][kolona1-2]=79;
+                                            drugi_igrac_sakriveno[red1][kolona1+1]=79;
+
+                                            drugi_igrac_sakriveno[red1-1][kolona1-2]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if(drugi_igrac[red1][kolona1+1]==335)
+                                    {
+                                        y++;
+                                        if(drugi_igrac[red1][kolona1+2]==335)
+                                        {
+                                            y++;
+                                            if(drugi_igrac[red1][kolona1+3]==335)
+                                            {
+                                                y++;
+                                                drugi_igrac[red1+1][kolona1+4]=79;
+                                                drugi_igrac[red1+1][kolona1+3]=79;
+                                                drugi_igrac[red1+1][kolona1+2]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+                                                drugi_igrac[red1+1][kolona1]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+
+                                                drugi_igrac[red1][kolona1+4]=79;
+                                                drugi_igrac[red1][kolona1-1]=79;
+
+                                                drugi_igrac[red1-1][kolona1+4]=79;
+                                                drugi_igrac[red1-1][kolona1+3]=79;
+                                                drugi_igrac[red1-1][kolona1+2]=79;
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+                                                drugi_igrac[red1-1][kolona1]=79;
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+
+                                                drugi_igrac_sakriveno[red1+1][kolona1+4]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+3]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+2]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                                drugi_igrac_sakriveno[red1][kolona1+4]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1-1]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1+4]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+3]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+2]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                            }
+                                            else
+                                            {
+                                                drugi_igrac[red1+1][kolona1+3]=79;
+                                                drugi_igrac[red1+1][kolona1+2]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+                                                drugi_igrac[red1+1][kolona1]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+
+                                                drugi_igrac[red1][kolona1-1]=79;
+                                                drugi_igrac[red1][kolona1+3]=79;
+
+                                                drugi_igrac[red1-1][kolona1+3]=79;
+                                                drugi_igrac[red1-1][kolona1+2]=79;
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+                                                drugi_igrac[red1-1][kolona1]=79;
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+
+                                                drugi_igrac_sakriveno[red1+1][kolona1+3]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+2]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                                drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1+3]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1+3]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+2]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            drugi_igrac[red1+1][kolona1+2]=79;
+                                            drugi_igrac[red1+1][kolona1+1]=79;
+                                            drugi_igrac[red1+1][kolona1]=79;
+                                            drugi_igrac[red1+1][kolona1-1]=79;
+
+                                            drugi_igrac[red1][kolona1+2]=79;
+                                            drugi_igrac[red1][kolona1-1]=79;
+
+                                            drugi_igrac[red1-1][kolona1+2]=79;
+                                            drugi_igrac[red1-1][kolona1+1]=79;
+                                            drugi_igrac[red1-1][kolona1]=79;
+                                            drugi_igrac[red1-1][kolona1-1]=79;
+
+                                            drugi_igrac_sakriveno[red1+1][kolona1+2]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                            drugi_igrac_sakriveno[red1][kolona1+2]=79;
+                                            drugi_igrac_sakriveno[red1][kolona1-1]=79;
+
+                                            drugi_igrac_sakriveno[red1-1][kolona1+2]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        drugi_igrac[red1+1][kolona1+1]=79;
+                                        drugi_igrac[red1+1][kolona1]=79;
+                                        drugi_igrac[red1+1][kolona1-1]=79;
+
+                                        drugi_igrac[red1][kolona1+1]=79;
+                                        drugi_igrac[red1][kolona1-1]=79;
+
+                                        drugi_igrac[red1-1][kolona1+1]=79;
+                                        drugi_igrac[red1-1][kolona1]=79;
+                                        drugi_igrac[red1-1][kolona1-1]=79;
+
+                                        drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                        drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                        drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                        drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                        drugi_igrac_sakriveno[red1][kolona1-1]=79;
+
+                                        drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                        drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                        drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if(drugi_igrac[red1-1][kolona1]==335 || drugi_igrac[red1+1][kolona1]==335)
+                                {
+                                    if(drugi_igrac[red1-1][kolona1]==335)
+                                    {
+                                        if(drugi_igrac[red1-2][kolona1]==335)
+                                        {
+                                            if(drugi_igrac[red1-3][kolona1]==335)
+                                            {
+                                                drugi_igrac[red1-4][kolona1-1]=79;
+                                                drugi_igrac[red1-3][kolona1-1]=79;
+                                                drugi_igrac[red1-2][kolona1-1]=79;
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+                                                drugi_igrac[red1][kolona1-1]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+
+                                                drugi_igrac[red1-4][kolona1]=79;
+                                                drugi_igrac[red1+1][kolona1]=79;
+
+                                                drugi_igrac[red1-4][kolona1+1]=79;
+                                                drugi_igrac[red1-3][kolona1+1]=79;
+                                                drugi_igrac[red1-2][kolona1+1]=79;
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+                                                drugi_igrac[red1][kolona1+1]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+
+                                                drugi_igrac_sakriveno[red1-4][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1-3][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1-2][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                                drugi_igrac_sakriveno[red1-4][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1]=79;
+
+                                                drugi_igrac_sakriveno[red1-4][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-3][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-2][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                            }
+                                            else
+                                            {
+                                                if(drugi_igrac[red1+1][kolona1]==335)
+                                                {
+                                                    drugi_igrac[red1-3][kolona1-1]=79;
+                                                    drugi_igrac[red1-2][kolona1-1]=79;
+                                                    drugi_igrac[red1-1][kolona1-1]=79;
+                                                    drugi_igrac[red1][kolona1-1]=79;
+                                                    drugi_igrac[red1+1][kolona1-1]=79;
+                                                    drugi_igrac[red1+2][kolona1-1]=79;
+
+                                                    drugi_igrac[red1-3][kolona1]=79;
+                                                    drugi_igrac[red1+2][kolona1]=79;
+                                                    
+                                                    drugi_igrac[red1-3][kolona1+1]=79;
+                                                    drugi_igrac[red1-2][kolona1+1]=79;
+                                                    drugi_igrac[red1-1][kolona1+1]=79;
+                                                    drugi_igrac[red1][kolona1+1]=79;
+                                                    drugi_igrac[red1+1][kolona1+1]=79;
+                                                    drugi_igrac[red1+2][kolona1+1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-3][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1-2][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1-1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-3][kolona1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1]=79;
+                                                    
+                                                    drugi_igrac_sakriveno[red1-3][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1-2][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1+1]=79;
+                                                }
+                                                else
+                                                {
+                                                    drugi_igrac[red1-3][kolona1-1]=79;
+                                                    drugi_igrac[red1-2][kolona1-1]=79;
+                                                    drugi_igrac[red1-1][kolona1-1]=79;
+                                                    drugi_igrac[red1][kolona1-1]=79;
+                                                    drugi_igrac[red1+1][kolona1-1]=79;
+
+                                                    drugi_igrac[red1-3][kolona1]=79;
+                                                    drugi_igrac[red1+1][kolona1]=79;
+                                                    
+                                                    drugi_igrac[red1-3][kolona1+1]=79;
+                                                    drugi_igrac[red1-2][kolona1+1]=79;
+                                                    drugi_igrac[red1-1][kolona1+1]=79;
+                                                    drugi_igrac[red1][kolona1+1]=79;
+                                                    drugi_igrac[red1+1][kolona1+1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-3][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1-2][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-3][kolona1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                                    
+                                                    drugi_igrac_sakriveno[red1-3][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1-2][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if(drugi_igrac[red1+1][kolona1]==335)
+                                            {
+                                                if(drugi_igrac[red1+2][kolona1]==335)
+                                                {
+                                                    drugi_igrac[red1-2][kolona1-1]=79;
+                                                    drugi_igrac[red1-1][kolona1-1]=79;
+                                                    drugi_igrac[red1][kolona1-1]=79;
+                                                    drugi_igrac[red1+1][kolona1-1]=79;
+                                                    drugi_igrac[red1+2][kolona1-1]=79;
+                                                    drugi_igrac[red1+3][kolona1-1]=79;
+                                                    
+                                                    drugi_igrac[red1-2][kolona1]=79;
+                                                    drugi_igrac[red1+3][kolona1]=79;
+
+                                                    drugi_igrac[red1-2][kolona1+1]=79;
+                                                    drugi_igrac[red1-1][kolona1+1]=79;
+                                                    drugi_igrac[red1][kolona1+1]=79;
+                                                    drugi_igrac[red1+1][kolona1+1]=79;
+                                                    drugi_igrac[red1+2][kolona1+1]=79;
+                                                    drugi_igrac[red1+3][kolona1+1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-2][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+3][kolona1-1]=79;
+                                                    
+                                                    drugi_igrac_sakriveno[red1-2][kolona1]=79;
+                                                    drugi_igrac_sakriveno[red1+3][kolona1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-2][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+3][kolona1+1]=79;
+                                                }
+                                                else
+                                                {
+                                                    drugi_igrac[red1-2][kolona1-1]=79;
+                                                    drugi_igrac[red1-1][kolona1-1]=79;
+                                                    drugi_igrac[red1][kolona1-1]=79;
+                                                    drugi_igrac[red1+1][kolona1-1]=79;
+                                                    drugi_igrac[red1+2][kolona1-1]=79;
+                                                    
+                                                    drugi_igrac[red1-2][kolona1]=79;
+                                                    drugi_igrac[red1+2][kolona1]=79;
+
+                                                    drugi_igrac[red1-2][kolona1+1]=79;
+                                                    drugi_igrac[red1-1][kolona1+1]=79;
+                                                    drugi_igrac[red1][kolona1+1]=79;
+                                                    drugi_igrac[red1+1][kolona1+1]=79;
+                                                    drugi_igrac[red1+2][kolona1+1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-2][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1-1]=79;
+                                                    
+                                                    drugi_igrac_sakriveno[red1-2][kolona1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-2][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1+1]=79;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                drugi_igrac[red1-2][kolona1-1]=79;
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+                                                drugi_igrac[red1][kolona1-1]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+
+                                                drugi_igrac[red1-2][kolona1]=79;
+                                                drugi_igrac[red1+1][kolona1]=79;
+
+                                                drugi_igrac[red1-2][kolona1+1]=79;
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+                                                drugi_igrac[red1][kolona1+1]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+
+                                                drugi_igrac_sakriveno[red1-2][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                                drugi_igrac_sakriveno[red1-2][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1]=79;
+
+                                                drugi_igrac_sakriveno[red1-2][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if(drugi_igrac[red1+1][kolona1]==335)
+                                        {
+                                            if(drugi_igrac[red1+2][kolona1]==335)
+                                            {
+                                                if(drugi_igrac[red1+3][kolona1]==335)
+                                                {
+                                                    drugi_igrac[red1-1][kolona1-1]=79;
+                                                    drugi_igrac[red1][kolona1-1]=79;
+                                                    drugi_igrac[red1+1][kolona1-1]=79;
+                                                    drugi_igrac[red1+2][kolona1-1]=79;
+                                                    drugi_igrac[red1+3][kolona1-1]=79;
+                                                    drugi_igrac[red1+4][kolona1-1]=79;
+
+                                                    drugi_igrac[red1-1][kolona1]=79;
+                                                    drugi_igrac[red1+4][kolona1]=79;
+
+                                                    drugi_igrac[red1-1][kolona1+1]=79;
+                                                    drugi_igrac[red1][kolona1+1]=79;
+                                                    drugi_igrac[red1+1][kolona1+1]=79;
+                                                    drugi_igrac[red1+2][kolona1+1]=79;
+                                                    drugi_igrac[red1+3][kolona1+1]=79;
+                                                    drugi_igrac[red1+4][kolona1+1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+3][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+4][kolona1-1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                    drugi_igrac_sakriveno[red1+4][kolona1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+3][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+4][kolona1+1]=79;
+                                                }
+                                                else
+                                                {
+                                                    drugi_igrac[red1-1][kolona1-1]=79;
+                                                    drugi_igrac[red1][kolona1-1]=79;
+                                                    drugi_igrac[red1+1][kolona1-1]=79;
+                                                    drugi_igrac[red1+2][kolona1-1]=79;
+                                                    drugi_igrac[red1+3][kolona1-1]=79;
+
+                                                    drugi_igrac[red1-1][kolona1]=79;
+                                                    drugi_igrac[red1+3][kolona1]=79;
+
+                                                    drugi_igrac[red1-1][kolona1+1]=79;
+                                                    drugi_igrac[red1][kolona1+1]=79;
+                                                    drugi_igrac[red1+1][kolona1+1]=79;
+                                                    drugi_igrac[red1+2][kolona1+1]=79;
+                                                    drugi_igrac[red1+3][kolona1+1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1-1]=79;
+                                                    drugi_igrac_sakriveno[red1+3][kolona1-1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                    drugi_igrac_sakriveno[red1+3][kolona1]=79;
+
+                                                    drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+2][kolona1+1]=79;
+                                                    drugi_igrac_sakriveno[red1+3][kolona1+1]=79;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                drugi_igrac[red1-1][kolona1-1]=79;
+                                                drugi_igrac[red1][kolona1-1]=79;
+                                                drugi_igrac[red1+1][kolona1-1]=79;
+                                                drugi_igrac[red1+2][kolona1-1]=79;
+
+                                                drugi_igrac[red1-1][kolona1]=79;
+                                                drugi_igrac[red1+2][kolona1]=79;
+
+                                                drugi_igrac[red1-1][kolona1+1]=79;
+                                                drugi_igrac[red1][kolona1+1]=79;
+                                                drugi_igrac[red1+1][kolona1+1]=79;
+                                                drugi_igrac[red1+2][kolona1+1]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+                                                drugi_igrac_sakriveno[red1+2][kolona1-1]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                                drugi_igrac_sakriveno[red1+2][kolona1]=79;
+
+                                                drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                                drugi_igrac_sakriveno[red1+2][kolona1+1]=79;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            drugi_igrac[red1+1][kolona1+1]=79;
+                                            drugi_igrac[red1+1][kolona1]=79;
+                                            drugi_igrac[red1+1][kolona1-1]=79;
+
+                                            drugi_igrac[red1][kolona1+1]=79;
+                                            drugi_igrac[red1][kolona1-1]=79;
+
+                                            drugi_igrac[red1-1][kolona1+1]=79;
+                                            drugi_igrac[red1-1][kolona1]=79;
+                                            drugi_igrac[red1-1][kolona1-1]=79;
+
+                                            drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                            drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                            drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                            drugi_igrac_sakriveno[red1][kolona1-1]=79;
+
+                                            drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                            drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    drugi_igrac[red1+1][kolona1+1]=79;
+                                    drugi_igrac[red1+1][kolona1]=79;
+                                    drugi_igrac[red1+1][kolona1-1]=79;
+
+                                    drugi_igrac[red1][kolona1+1]=79;
+                                    drugi_igrac[red1][kolona1-1]=79;
+
+                                    drugi_igrac[red1-1][kolona1+1]=79;
+                                    drugi_igrac[red1-1][kolona1]=79;
+                                    drugi_igrac[red1-1][kolona1-1]=79;
+
+                                    drugi_igrac_sakriveno[red1+1][kolona1+1]=79;
+                                    drugi_igrac_sakriveno[red1+1][kolona1]=79;
+                                    drugi_igrac_sakriveno[red1+1][kolona1-1]=79;
+
+                                    drugi_igrac_sakriveno[red1][kolona1+1]=79;
+                                    drugi_igrac_sakriveno[red1][kolona1-1]=79;
+
+                                    drugi_igrac_sakriveno[red1-1][kolona1+1]=79;
+                                    drugi_igrac_sakriveno[red1-1][kolona1]=79;
+                                    drugi_igrac_sakriveno[red1-1][kolona1-1]=79;
+                                }
+                            }
+                            return 2;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return 1;
+                }
+    }
+    else
+    {
+        drugi_igrac[red1][kolona1]=79;
+        drugi_igrac_sakriveno[red1][kolona1]=79;
+        return 0;
+    }
 }
 void isaisdas(int n,int m,int prvi_igrac[n][m])
 {
