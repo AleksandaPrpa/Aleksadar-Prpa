@@ -202,10 +202,10 @@ void bot()
     int bot[n][m];
     int prvi_igrac_sakriveno[n][m];
     int bot_sakriveno[n][m];
-    char ime_prvi_igrac[9999];
+    char ime_prvi_b_igrac[999];
     char ime_bot[3];
     printf("Unesi ime prvog igraca: ");
-    gets(ime_prvi_igrac);
+    gets(ime_prvi_b_igrac);
     strcpy(ime_bot,"Bot");
     system("cls");
     for(i=0;i<12;i++)
@@ -218,7 +218,7 @@ void bot()
             bot_sakriveno[i][j]=88;
         }
     }
-    printf("%s namesta brodove\n", ime_prvi_igrac);
+    printf("%s namesta brodove\n", ime_prvi_b_igrac);
     ispis_table();
     unos_brodova(n,m,prvi_igrac);
     printf("Pritisni bilo koje dugme da nastavis.\n");
@@ -230,7 +230,7 @@ void bot()
     {
         if (potez % 2 == 0)
         {
-            printf("%s igra\n", ime_prvi_igrac);
+            printf("%s igra\n", ime_prvi_b_igrac);
             switch (provera(n,m,bot,bot_sakriveno))
             {
             case 0:
@@ -253,7 +253,7 @@ void bot()
             if(potop1==10)
             {
                 rezultat++;
-                printf("%s je pobednik\nPostava brodova od %s je\n", ime_prvi_igrac,ime_prvi_igrac);
+                printf("%s je pobednik\nPostava brodova od %s je\n", ime_prvi_b_igrac,ime_prvi_b_igrac);
                 isaisdas(n,m,prvi_igrac_sakriveno);
             }
         }
