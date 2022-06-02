@@ -6,7 +6,7 @@
 void main()
 {
     system("cls");
-    int n=4,m=3,i,j;
+    int n=4,m=3,i,j,br;
     float det;
     float a[n][m];
     float b[m][m];
@@ -37,14 +37,21 @@ void main()
     printf("detB= %.2f\n",det);
     getch();                                                                                           
     system("cls");
-    if(det==0)
-    {
-        printf("detB==0\nNemoze da se izracuna rank matrice\n");
-    }
+    if(b[1][1]==0)
+        br=1;
     else
     {
-        printf("detB!=0\nRang matrice je %d",m);
-    }  
+        if(b[2][2]==0)
+            br=2;
+        else
+        {
+            br=3;
+        }
+    }
+    if(b[0][0]==0)
+        printf("Nemoze da se odredi rang matrice\n");
+    else
+        printf("Rang matrice je %d\n");
 }
 void skracivanje(int n,int m,float a[n][m],float b[m][m])
 {
@@ -103,7 +110,7 @@ void sabiranje2(int n,int m,float a[n][m],int j)
     int i,xd;
     y=a[j][1];
     z=a[1][1];
-    xd=2;
+    xd=1;
     if(a[2][2]==0)
     {
         z=a[0][2];
