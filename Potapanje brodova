@@ -12,13 +12,16 @@ int main()
 void multiplayer_mod()
 {
     int i,j;//brojaci
-    int n=13,m=13;
+    int rezultat,potez,potop_p,potop_d;
+    int n=13,m=13,l=7;
     int prvi_igrac[n][m];
     int drugi_igrac[n][m];
     int prvi_igrac_sakriveno[n][m];
     int drugi_igrac_sakriveno[n][m];
     char ime_prvi_igrac[100];
     char ime_drugi_igrac[100];
+    int prvi_igrac_naoruzanje[l];
+    int drugi_igrac_naoruzanje[l];
     prvila_3();
     getch();
     system("cls");
@@ -40,26 +43,137 @@ void multiplayer_mod()
     }
     printf("%s namesta brodove\n", ime_prvi_igrac);
     ispis_table();
-    unos_brodova(n,m,prvi_igrac);
+    //unos_brodova(n,m,prvi_igrac);
     system("cls");
     printf("%s kupuje naoruzanja\n", ime_prvi_igrac);
-    unos_naoruzanja(n,m,prvi_igrac);
+    //unos_naoruzanja(n,m,prvi_igrac,l,prvi_igrac_naoruzanje);
     printf("Pritisni bilo koje dugme da sledeci igrac namesta brodove.\n");
     getch();
     system("cls");
     printf("%s namesta brodove\n", ime_drugi_igrac);
     ispis_table();
     unos_brodova(n,m,drugi_igrac);
+    system("cls");
+    printf("%s kupuje naoruzanja\n", ime_drugi_igrac);
+    unos_naoruzanja(n,m,drugi_igrac,l,drugi_igrac_naoruzanje);
     printf("Pritisni bilo koje dugme da nastavis.\n");
     getch();
+    while(rezultat==0)
+    {
+        if(potez%2==0)
+        {
+            switch (provera_mod(n,m,drugi_igrac,drugi_igrac_sakriveno,l,prvi_igrac_naoruzanje,ime_prvi_igrac))
+            {
+            case 0:
+                system("cls");
+                isaisdas(n,m,drugi_igrac_sakriveno);
+                printf("Promasaj\n");
+                getch();
+                system("cls");
+                break;
+            case 1:
+                potez++;
+                system("cls");
+                isaisdas(n,m,drugi_igrac_sakriveno);
+                getch();
+                system("cls");
+                break;
+            case 2:
+                potez++;
+                potop_p++;
+                system("cls");
+                isaisdas(n,m,drugi_igrac_sakriveno);
+                getch();
+                system("cls");
+                break;
+            default:
+                break;
+            }
+            if(potop_p==10)
+            {
+                rezultat++;
+                printf("%s je pobednik\nPostava brodova od %s je\n", ime_prvi_igrac,ime_prvi_igrac);
+                isaisdas(n,m,prvi_igrac);
+            }
+            rezultat++;
+        }
+        else
+        {
+            provera_mod(n,m,prvi_igrac,prvi_igrac_sakriveno,l,drugi_igrac_naoruzanje,ime_drugi_igrac);
+            if(potop_d==10)
+            {
+                rezultat++;
+                printf("%s je pobednik\nPostava brodova od %s je\n", ime_drugi_igrac,ime_drugi_igrac);
+                isaisdas(n,m,drugi_igrac);
+            }
+        }
+        potez++;
+    }    
+}
+int provera_mod(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m],int l,int naoruzanje[l],char ime_prvi_igrac[100])
+{
+    int c;
+    a:
+    system("cls");
+    isaisdas(n,m,drugi_igrac_sakriveno);
+    printf("-1.Normalno\n-2.Borac-stanje %d\n-3.Nosac torpeda-stanje %d\n-4.Bombarder-stanje %d\n-5.Atomski bombarder-stanje %d\n-6.Odbrana-stanje %d\n-7.Radar-stanje %d\n-8.Podmornica-stanje %d\n",naoruzanje[0],naoruzanje[1],naoruzanje[2],naoruzanje[3],naoruzanje[4],naoruzanje[5],naoruzanje[6]);
+    scanf("%d",&c);
+    switch (c)
+    {
+    case 1:
+        system("cls");
+        isaisdas(n,m,drugi_igrac_sakriveno);
+        printf("%s igra\n", ime_prvi_igrac);
+        switch (provera(n,m,drugi_igrac,drugi_igrac_sakriveno))
+        {
+            case 0:
+                system("cls");
+                isaisdas(n,m,drugi_igrac_sakriveno);
+                printf("Promasaj\n");
+                getch();
+                system("cls");
+                return 0;
+                break;
+            case 1:
+                system("cls");
+                isaisdas(n,m,drugi_igrac_sakriveno);
+                getch();
+                system("cls");
+                return 1;
+                break;
+            case 2:
+                system("cls");
+                isaisdas(n,m,drugi_igrac_sakriveno);
+                getch();
+                system("cls");
+                return 2;
+                break;
+            default:
+                break;
+            }
+        break;
+    case 2:
+        
+    case 3:
+        
+    case 4:
+        
+    case 5:
+        
+    case 6:
+        
+    case 7:
+        
+    case 8:
+
+    default:
+        printf("Pogresan unos\n");
+        getch();
+        goto a;
+        break;
+    }
 }
 void bot_mod()
 {
 
-}
-void unos_naoruzanja(int n,int m,int prvi_igrac[n][m])
-{
-    int novac=260;
-    int borac=0,borac_o=2,nosac_torpeda=0,nosac_torpeda_o=2,bombarder=0,bombarder_o=2,atomski_bombarder=0,atomski_bombarder_o=1,odbrana=0,odbrana_o=3,radar=0,radar_o=1,podmornica=0,podmornica_o=1;
-    //printf("-1. Borac-stanje %d-kosta 15 dinara\n-2. nosac torpeda-stanje %d-kosta 10 dinara\n");
 }
