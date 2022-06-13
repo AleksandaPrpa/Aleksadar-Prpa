@@ -1,9 +1,7 @@
 void kontrolna_tabla()
 {
     int c;
-    a:
-    printf("1.Igra\n2.Podesavanja\n");
-    scanf("%d",&c);
+    c=1;
     if(c==1)
     {
         gamamode();
@@ -18,7 +16,6 @@ void kontrolna_tabla()
         {
             system("cls");
             printf("Pogresan unos.\n");
-            goto a;
         }
     }
 }
@@ -26,6 +23,7 @@ void gamamode()
 {
     int c;
     a:
+    system("cls");
     printf("1.Klasicno\n2.Mod\n");
     scanf("%d",&c);
     if(c==1)
@@ -47,55 +45,266 @@ void gamamode()
     }
 }
 void podesavanja()
-{
-
-}
+{}
 void Klasicno()
 {
     int c;
     a:
-    printf("1.Za dva igraca\n2.Protiv kompjutera\n");
+    system("cls");
+    printf("1.Za dva igraca\n2.Protiv kompjutera\n3.Nazad\n");
     scanf("%d",&c);
-    if(c==1)
+    switch (c)
     {
+    case 1:
         multiplayer();
+        break;
+    case 2:
+        bot();
+        break;
+    case 3:
+        gamamode();
+        break;
+    default:
+        system("cls");
+        printf("Pogresan unos.\n");
+        goto a;
+        break;
     }
-    else
+    
+}
+void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoruzanje[l])
+{
+    int novac=260,x;
+    int borac=0,borac_o=2,nosac_torpeda=0,nosac_torpeda_o=2,bombarder=0,bombarder_o=2,atomski_bombarder=0,atomski_bombarder_o=1,odbrana=0,odbrana_o=3,radar=0,radar_o=1,podmornica=0,podmornica_o=1;   
+    int r1,r2,p,q,y,z;
+    while(novac>0)
     {
-        if(c==2)
+        printf("Unesi redni broj da dodas naoruzanje\nImas %d novca\n",novac);
+        printf("-1. Borac-stanje %d-kosta 15 dinara\n\tX X X X X X X X X X\n\tX O O O O O X X X X\n\tX O O O O O X X X X\n\tX X X X X X X X X X\n",borac_o);
+        printf("-2. Nosac torpeda-stanje %d-kosta 10 dinara\n\tX X X X X X X X X X\n\tO O O O O O O O O O\n\tX X X X X X X X X X\n",nosac_torpeda_o);
+        printf("-3. Bombarder-stanje %d-kosta 12 dinara\n\tX X X X X X X X X X\n\tX X X X O X X X X X\n\tX X X X O O X X X X\n\tX X X X X X O X X X\n\tX X X X X X X X X X\n\tNasumecno baci cetiri bombe.\n",bombarder_o);
+        printf("-4. Atomski bombarder-stanje %d-kosta 100 dinara\n\tX X X X X X X X X X\n\tX O O O O O X X X X\n\tX O O O O O X X X X\n\tX O O O O O X X X X\n\tX O O O O O X X X X\n\tX O O O O O X X X X\n\tX X X X X X X X X X\n",atomski_bombarder_o);
+        printf("-5. Odbrana-stanje %d-kosta 10 dinara\n\tO O O O O O O O O O\n\tO O O O O O O O O O\n",odbrana_o);
+        printf("-6. Radar-stanje %d-kosta 15 dinara\n\tX X X X X X X X X X\n\tX X X X O O O X X X\n\tX X X X O O O X X X\n\tX X X X O O O X X X\n\tX X X X X X X X X X\n\tIspita da li ima protivnickog broda.\n",radar_o);
+        printf("-7. Podmornica-stanje %d-kosta 10 dinara\n\tX X X O X X X X X X\n\tX X X O X X X X X X\n\tX X X O X X X X X X\n\tX X X O X X X X X X\n\tX O O O X X X X X X\n\tX X O X X X X X X X\n\tX X O X X X X X X X\n\tX X O X X X X X X X\n\tX X O X X X X X X X\n\tX X O X X X X X X X\n",podmornica_o);
+        printf("-8. Nastavi\n");
+        scanf("%d",&x);
+        switch (x)
         {
-            bot();
-        }
-        else
-        {
+        case 1:
             system("cls");
-            printf("Pogresan unos.\n");
-            goto a;
+            if(borac_o!=0)
+            {
+                borac++;
+                borac_o--;
+                novac=novac-15;
+            }
+            else
+            {
+                printf("Vise nema na stanju");
+            }
+            break;
+        case 2:
+            system("cls");
+            if(nosac_torpeda_o!=0)
+            {
+                nosac_torpeda++;
+                nosac_torpeda_o--;
+                novac=novac-10;
+            }
+            else
+            {
+                printf("Vise nema na stanju");
+            }
+            break;
+        case 3:
+            system("cls");
+            if(bombarder_o!=0)
+            {
+                bombarder++;
+                bombarder_o--;
+                novac=novac-12;
+            }
+            else
+            {
+                printf("Vise nema na stanju");
+            }
+            break;
+        case 4:
+            system("cls");
+            if(atomski_bombarder_o!=0)
+            {
+                atomski_bombarder++;
+                atomski_bombarder_o--;
+                novac=novac-100;
+            }
+            else
+            {
+                printf("Vise nema na stanju");
+            }
+            break;
+        case 5:       
+            if(odbrana_o!=0)
+            {
+                odbrana++;
+                odbrana_o--;
+                novac=novac-10;
+                a:
+                getch();
+                system("cls"); 
+                if(odbrana==1)
+                {
+                    printf("Unesi koja dva reda hoces da odbranis od aviona.\n");
+                    scanf("%d%d",&r1,&r2);
+                    if(r1<1 || r1>10)
+                    {
+                        printf("Pogresan unos.\n");
+                        goto a;
+                    }
+                    else
+                    {
+                        if(r2<1 || r2>10)
+                        {
+                            printf("Pogresan unos.\n");
+                            goto a;
+                        } 
+                    }
+                    if(r1==r2)
+                    {
+                        printf("Pogresan unos.\nMoraju da budu razliciti redovi.\n");
+                        goto a;
+                    }
+                    if(abs(r1-r2)!=1)
+                    {
+                        printf("Pogresan unos.\nTreba da budu jedan do drugog.\n");
+                        goto a;
+                    }
+                    if(prvi_igrac[r1][0]!=1 && prvi_igrac[r2][0]!=1)
+                    {
+                        printf("Pogresan unos.\nVec postoji odbrana tu.\n");
+                    }
+                    prvi_igrac[r1][0]=1;
+                    prvi_igrac[r2][0]=1;
+                }
+                if(odbrana==2)
+                {
+                    printf("Unesi koja dva reda hoces da odbranis od aviona.\n");
+                    scanf("%d%d",&p,&q);
+                    if(p==q)
+                    {
+                        printf("Pogresan unos.\nMoraju da budu razliciti redovi.\n");
+                        goto a;
+                    }
+                    if(abs(p-q)!=1)
+                    {
+                        printf("Pogresan unos.\nTreba da budu jedan do drugog.\n");
+                        goto a;
+                    }
+                    if(p==r1 || p==r2 || q==r1 || q==r2)
+                    {
+                        printf("Pogresan unos.\nOdbrana se preklapa.\n");
+                        goto a;
+                    }
+                    
+                    prvi_igrac[p][0]=1;
+                    prvi_igrac[q][0]=1;
+                }
+                if(odbrana==3)
+                {
+                    printf("Unesi koja dva reda hoces da odbranis od aviona.\n");
+                    scanf("%d%d",&y,&z);
+                    if(y==z)
+                    {
+                        printf("Pogresan unos.\nMoraju da budu razliciti redovi.\n");
+                        goto a;
+                    }
+                    if(abs(z-y)!=1)
+                    {
+                        printf("Pogresan unos.\nTreba da budu jedan do drugog.\n");
+                        goto a;
+                    }
+                    if(y==r1 || y==r2 || z==r1 || z==r2 || y==p || y==q || z==p || z==q)
+                    {
+                        printf("Pogresan unos.\nOdbrana se preklapa.\n");
+                        goto a;
+                    }
+                    prvi_igrac[y][0]=1;
+                    prvi_igrac[z][0]=1;
+                }
+            }
+            else
+            {
+                printf("Vise nema na stanju");
+            }
+            break;
+        case 6:
+            system("cls");
+            if(radar_o!=0)
+            {
+                radar++;
+                radar_o--;
+                novac=novac-15;
+            }
+            else
+            {
+                printf("Vise nema na stanju");
+            }
+            break;
+        case 7:
+            system("cls");
+            if(podmornica_o!=0)
+            {
+                podmornica++;
+                podmornica_o--;
+                novac=novac-10;
+            }
+            else
+            {
+                printf("Vise nema na stanju");
+            }
+            break;
+        case 8:
+            system("cls");
+            novac=0;
+            break;
+        default:
+            system("cls");
+            printf("Pogresan unos");
+            break;
         }
+        printf("\n");
     }
+    prvi_igrac_naoruzanje[0]=borac;
+    prvi_igrac_naoruzanje[1]=nosac_torpeda;
+    prvi_igrac_naoruzanje[2]=bombarder;
+    prvi_igrac_naoruzanje[3]=atomski_bombarder;
+    prvi_igrac_naoruzanje[4]=odbrana;
+    prvi_igrac_naoruzanje[5]=radar;
+    prvi_igrac_naoruzanje[6]=podmornica;
 }
 void Mod()
 {
     int c;
     a:
-    printf("1.Za dva igraca\n2.Protiv kompjutera\n");
+    system("cls");
+    printf("1.Za dva igraca\n2.Protiv kompjutera\n3.Nazad\n");
     scanf("%d",&c);
-    if(c==1)
+    switch (c)
     {
+    case 1:
         multiplayer_mod();
-    }
-    else
-    {
-        if(c==2)
-        {
-            bot_mod();
-        }
-        else
-        {
-            system("cls");
-            printf("Pogresan unos.\n");
-            goto a;
-        }
+        break;
+    case 2:
+        bot_mod();
+        break;
+    case 3:
+        gamamode();
+        break;
+    default:
+        system("cls");
+        printf("Pogresan unos.\n");
+        goto a;
+        break;
     }
 }
 void multiplayer()
