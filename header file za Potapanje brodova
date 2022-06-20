@@ -1,5 +1,663 @@
-void kontrolna_tabla()
+void kontrolna_tabla();
+void gamamode();
+void podesavanja();
+void Klasicno();
+void Mod();
+void multiplayer_mod();
+void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoruzanje[l]);
+void bot_mod();
+int provera_mod_bot(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m],int l,int naoruzanje[l]);
+int provera_mod(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m],int l,int naoruzanje[l],char ime_prvi_igrac[100]);
+void multiplayer();
+int provera(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m]);
+int unos_brodova_bot(int n,int m,int bot[n][m]);
+void bot_brod_1(int n,int m,int bot[n][m]);
+void bot_brod_2(int n,int m,int bot[n][m]);
+void bot_brod_3(int n,int m,int bot[n][m]);
+void bot_brod_4(int n,int m,int bot[n][m]);
+void isaisdas(int n,int m,int prvi_igrac[n][m]);
+void ispis_table();
+int unos_polja();
+int unos_brodova(int n,int m,int prvi_igrac[n][m]);
+void bot();
+int provera_bot();
+void unos_naoruzanja_bot(int n,int m,int bot[n][m],int l,int bot_naoruzanje[l]);
+void pravila1();
+void pravila2();
+void pravila_3();
+void pravila_4();
+void kraj();
+void paint();
+paint()
 {
+    kontrolna_tabla();
+}
+bot_mod()
+{
+    pravila_4();
+    int i,j,x;//brojaci
+    int rezultat,potez,potop_p=0,potop_d=0;
+    int n=13,m=13,l=7;
+    int prvi_igrac[n][m];
+    int bot[n][m];
+    int prvi_igrac_sakriveno[n][m];
+    int bot_sakriveno[n][m];
+    char ime_prvi_igrac[100];
+    char bot_ime[3];
+    int prvi_igrac_naoruzanje[l];
+    int bot_naoruzanje[l];
+    getch();
+    system("cls");
+    printf("Unesi ime prvog igraca: ");
+    gets(ime_prvi_igrac);
+    gets(ime_prvi_igrac);
+    strcpy(bot_ime,"Bot");
+    system("cls");
+    for(i=0;i<12;i++)
+    {
+        for(j=0;j<12;j++)
+        {
+            prvi_igrac[i][j]=88;//
+            bot[i][j]=88;
+            prvi_igrac_sakriveno[i][j]=88;
+            bot_sakriveno[i][j]=88;
+        }
+    }
+    printf("%s namesta brodove\n", ime_prvi_igrac);
+    ispis_table();
+    unos_brodova(n,m,prvi_igrac);
+    system("cls");
+    printf("%s kupuje naoruzanja\n", ime_prvi_igrac);
+    unos_naoruzanja(n,m,prvi_igrac,l,prvi_igrac_naoruzanje);
+    printf("Pritisni da nastavis.\n");
+    getch();
+    system("cls");
+    unos_brodova_bot(n,m,bot);
+    potez=0;
+    while(rezultat==0)
+    {
+        if(potez%2==0)
+        {
+            x=provera_mod(n,m,bot,bot_sakriveno,l,prvi_igrac_naoruzanje,ime_prvi_igrac);
+            switch (x)
+            {
+            case 0:
+                system("cls");
+                potop_p=potop_p+x;
+                isaisdas(n,m,bot_sakriveno);
+                getch();
+                system("cls");
+                break;
+            default:
+                potez++;
+                system("cls");
+                potop_p=potop_p+x;
+                isaisdas(n,m,bot_sakriveno);
+                getch();
+                system("cls");
+                break;
+            }
+            if(potop_p==20)
+            {
+                rezultat++;
+                printf("%s je pobednik\nPostava brodova od %s je\n", ime_prvi_igrac,ime_prvi_igrac);
+                isaisdas(n,m,prvi_igrac);
+                kraj();
+            }
+        }
+        else
+        {
+            x=provera_mod_bot(n,m,prvi_igrac,prvi_igrac_sakriveno,l,bot_naoruzanje);
+            switch (x)
+            {
+            case 0:
+                system("cls");
+                potop_d=potop_d+x;
+                isaisdas(n,m,prvi_igrac_sakriveno);
+                getch();
+                system("cls");
+                break;
+            default:
+                potez++;
+                system("cls");
+                potop_d=potop_d+x;
+                isaisdas(n,m,prvi_igrac_sakriveno);
+                getch();
+                system("cls");
+                break;
+            }
+            if(potop_d==20)
+            {
+                rezultat++;
+                printf("%s je pobednik\nPostava brodova od %s je\n", bot_ime,bot_ime);
+                isaisdas(n,m,bot);
+                kraj();
+            }
+        }
+        if(rezultat==0)
+        {
+        potez++;
+        printf("%s je pogodio %d/20 broda\n",ime_prvi_igrac,potop_p);
+        printf("%s je pogodio %d/20 broda\n",bot_ime,potop_d);
+        getch();	
+		}
+    }
+}
+provera_mod_bot(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m],int l,int naoruzanje[l])
+{
+    int c,x=0,i,j,u;
+    int r,yyy=20,yy=20,y=1,k,ra;
+    a:
+    srand(time(NULL));
+    c=rand()%7+1;
+    switch (c)
+    {
+    case 1:
+        f:
+        srand(time(NULL));
+        r=rand()%10+1;
+        y=rand()%10+1;
+        if(drugi_igrac[r][y]==335 || drugi_igrac[r][y]==79)
+        {
+            goto f;
+        }
+        if(drugi_igrac[r][y]==254 || drugi_igrac[r][y]==30 || drugi_igrac[r][y]==17)
+        {
+            drugi_igrac[r][y]=335;
+            drugi_igrac_sakriveno[r][y]=335;
+            return 1;
+        }
+        else
+        {
+            drugi_igrac[r][y]=335;
+            drugi_igrac_sakriveno[r][y]=335;
+            return 0;
+        }
+        break;
+    case 2:
+        if(naoruzanje[0]==0)
+        {
+            goto a;
+        }
+        naoruzanje[0]--;
+        o:
+        y=rand()%10+1;
+        if(y==10)
+        {
+            yy=9;
+        }
+        else
+        {
+            yy=y+1;
+        }
+        if(y<0 || y>10 || yy>10 || yy<0)
+        {
+            goto o;
+        }
+        if(abs(y-yy)!=1)
+        {
+            goto o;
+        }
+        cz:
+        u=rand()%10+1;
+        if(u<0 || u>10)
+        {
+            goto cz;
+        }
+        if(u<10 && u>6)
+        {
+            goto cz;
+        }
+        if(drugi_igrac[y][0]==1)
+        {
+            return 0;
+        }
+        else
+        {
+            if(drugi_igrac[yy][0]==1)
+            {
+                return 0;
+            }
+            else
+            {
+                if(u==10)
+                {
+                    for(i=0;i<5;i++)
+                    {
+                        if(drugi_igrac[y][u-i]==254 || drugi_igrac[y][u-i]==30 || drugi_igrac[y][u-i]==17)
+                        {
+                            x++;
+                        }
+                    }
+                    for(i=0;i<5;i++)
+                    {
+                        if(drugi_igrac[yy][u-i]==254 || drugi_igrac[yy][u-i]==30 || drugi_igrac[yy][u-i]==17)
+                        {
+                            x++;
+                        }
+                    }
+                    drugi_igrac[y][u]=335;
+                    drugi_igrac[y][u-1]=335;
+                    drugi_igrac[y][u-2]=335;
+                    drugi_igrac[y][u-3]=335;
+                    drugi_igrac[y][u-4]=335;
+                    drugi_igrac[yy][u]=335;
+                    drugi_igrac[yy][u-1]=335;
+                    drugi_igrac[yy][u-2]=335;
+                    drugi_igrac[yy][u-3]=335;
+                    drugi_igrac[yy][u-4]=335;
+                    drugi_igrac_sakriveno[y][u]=335;
+                    drugi_igrac_sakriveno[y][u-1]=335;
+                    drugi_igrac_sakriveno[y][u-2]=335;
+                    drugi_igrac_sakriveno[y][u-3]=335;
+                    drugi_igrac_sakriveno[y][u-4]=335;
+                    drugi_igrac_sakriveno[yy][u]=335;
+                    drugi_igrac_sakriveno[yy][u-1]=335;                            
+                    drugi_igrac_sakriveno[yy][u-2]=335;
+                    drugi_igrac_sakriveno[yy][u-3]=335;
+                    drugi_igrac_sakriveno[yy][u-4]=335;
+                    isaisdas(n,m,drugi_igrac_sakriveno);
+                    return x;
+                }
+                else
+                {
+                    for(i=0;i<5;i++)
+                    {
+                        if(drugi_igrac[y][u+i]==254 || drugi_igrac[y][u+i]==30 || drugi_igrac[y][u+i]==17)
+                        {
+                            x++;
+                        }
+                    }
+                    for(i=0;i<5;i++)
+                    {
+                        if(drugi_igrac[yy][u+i]==254 || drugi_igrac[yy][u+i]==30 || drugi_igrac[yy][u+i]==17)
+                        {
+                            x++;
+                        }
+                    }
+                    drugi_igrac[y][u]=335;
+                    drugi_igrac[y][u+1]=335;
+                    drugi_igrac[y][u+2]=335;
+                    drugi_igrac[y][u+3]=335;
+                    drugi_igrac[y][u+4]=335;
+                    drugi_igrac[yy][u]=335;
+                    drugi_igrac[yy][u+1]=335;
+                    drugi_igrac[yy][u+2]=335;
+                    drugi_igrac[yy][u+3]=335;
+                    drugi_igrac[yy][u+4]=335;
+                    drugi_igrac_sakriveno[y][u]=335;
+                    drugi_igrac_sakriveno[y][u+1]=335;
+                    drugi_igrac_sakriveno[y][u+2]=335;
+                    drugi_igrac_sakriveno[y][u+3]=335;
+                    drugi_igrac_sakriveno[y][u+4]=335;
+                    drugi_igrac_sakriveno[yy][u]=335;
+                    drugi_igrac_sakriveno[yy][u+1]=335;                            
+                    drugi_igrac_sakriveno[yy][u+2]=335;
+                    drugi_igrac_sakriveno[yy][u+3]=335;
+                    drugi_igrac_sakriveno[yy][u+4]=335;
+                    isaisdas(n,m,drugi_igrac_sakriveno);
+                    return x;
+                }
+            }
+        }
+    case 3:
+        if(naoruzanje[1]==0)
+        {
+            goto a;
+        }
+        naoruzanje[1]--;
+        p:
+        r=rand()%10+1;
+        if(r<1 || r>10)
+        {
+            goto p;
+        }
+        if(drugi_igrac[r][0]==1)
+        {
+            return 0;
+        }
+        for(i=1;i<11;i++)
+        {
+            if(drugi_igrac[r][i]==254 || drugi_igrac[r][i]==17 || drugi_igrac[r][i]==30)
+            {
+                x++;
+            }
+            drugi_igrac[r][i]=79;
+            drugi_igrac_sakriveno[r][i]=79;
+        }
+        return x;
+        break;
+    case 4:
+        if(naoruzanje[2]==0)
+        {
+            goto a;
+        }
+        naoruzanje[2]--;
+        w:
+        r=rand()%10+1;
+        k=rand()%10+1;
+        if(r<1 || r>10 || k>10 || k<1)
+        {
+            goto w;
+        }
+        if(drugi_igrac[r][0]==1)
+        {
+            return 0;
+        }
+        i=0;
+        while(i<4)
+        {
+            i++;
+            z:
+            y=0;
+            y=0;
+            y=0;
+            y=0;
+            y=0;
+            y=0;
+            srand(time(NULL));
+            y=rand()%9;
+            switch(y)
+            {
+                case 0://
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    break;
+                case 1://
+                    if(drugi_igrac[r-1][k]==254 || drugi_igrac[r-1][k]==30 || drugi_igrac[r-1][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    drugi_igrac[r-1][k]=335;
+                    drugi_igrac_sakriveno[r-1][k]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    break;
+                case 2://
+                    if(drugi_igrac[r-1][k+1]==254 || drugi_igrac[r-1][k+1]==30 || drugi_igrac[r-1][k+1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    drugi_igrac[r-1][k+1]=335;
+                    drugi_igrac_sakriveno[r-1][k+1]=335;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    break;
+                case 3://
+                    if(drugi_igrac[r][k-1]==254 || drugi_igrac[r][k-1]==30 || drugi_igrac[r][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    drugi_igrac[r][k-1]=335;
+                    drugi_igrac_sakriveno[r][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    break;
+                case 4://
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;   
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;    
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;             
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    break;
+                case 5:
+                    if(drugi_igrac[r][k+1]==254 || drugi_igrac[r][k+1]==30 || drugi_igrac[r][k+1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r-1][k+1]==254 || drugi_igrac[r-1][k+1]==30 || drugi_igrac[r-1][k+1]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    drugi_igrac[r][k+1]=335;
+                    drugi_igrac_sakriveno[r][k+1]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    drugi_igrac[r-1][k+1]=335;
+                    drugi_igrac_sakriveno[r-1][k+1]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    break;
+                case 6://
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    break;
+                case 7://
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k+1]==254 || drugi_igrac[r+1][k+1]==30 || drugi_igrac[r+1][k+1]==17)
+                        x++;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    drugi_igrac[r+1][k+1]=335;
+                    drugi_igrac_sakriveno[r+1][k+1]=335;
+                    break;
+                case 8://
+                    if(drugi_igrac[r+1][k+1]==254 || drugi_igrac[r+1][k+1]==30 || drugi_igrac[r+1][k+1]==17)
+                        x++;
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    drugi_igrac[r+1][k+1]=335;
+                    drugi_igrac_sakriveno[r+1][k+1]=335;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    break;
+            }
+        }
+        return x;
+    case 5:
+        if(naoruzanje[3]==0)
+        {
+            goto a;
+        }
+        naoruzanje[3]--;
+        h:
+        r=rand()%10+1;
+        k=rand()%10+1;
+        if(r<1 || r>10 || k>10 || k<1)
+        {
+            goto h;
+        }
+        if(drugi_igrac[r][0]==1)
+        {
+            return 0;
+        }
+        for(i=r-2;i<r+3;i++)
+        {
+            for(j=k-2;j<k+3;j++)
+            {
+                if(drugi_igrac[i][j]==254 || drugi_igrac[i][j]==30 || drugi_igrac[i][j]==17)
+                    x++;
+                drugi_igrac[i][j]=335;
+                drugi_igrac_sakriveno[i][j]=335;
+            }
+        }
+        return  x;
+    case 6:
+        if(naoruzanje[5]==0)
+        {
+            goto a;
+        }
+        naoruzanje[5]--;
+        s:
+        r=rand()%10+1;
+        k=rand()%10+1;
+        if(r<1 || r>10 || k>10 || k<1)
+        {
+            goto s;
+        }
+        for(i=r-1;i<r+2;i++)
+        {
+            for(j=k-1;j<k+2;j++)
+            {
+            }
+        } 
+        return 0;
+    case 7:
+        if(naoruzanje[6]==0)
+        {
+            goto a;
+        }
+        naoruzanje[6]--;
+        m:
+        r=rand()%10+1;
+        k=rand()%10+1;
+        if(r<1 || r>10 || k>10 || k<1)
+        {
+            goto m;
+        }
+        srand(time(NULL));
+        y=rand()%3;
+        switch(y)
+        {
+            case 0:
+                for(i=r;i<11;i++)
+                {
+                    if(drugi_igrac[i][k-1]==254 || drugi_igrac[i][k-1]==30 || drugi_igrac[i][k-1]==17)
+                        x++;
+                    drugi_igrac[i][k-1]=335;
+                    drugi_igrac_sakriveno[i][k-1]=335;
+                }
+                break;
+            case 1:
+                for(i=r;i<11;i++)
+                {
+                    if(drugi_igrac[i][k]==254 || drugi_igrac[i][k]==30 || drugi_igrac[i][k]==17)
+                        x++;
+                    drugi_igrac[i][k]=335;
+                    drugi_igrac_sakriveno[i][k]=335;
+                }
+                break;
+            case 2:
+                for(i=r;i<11;i++)
+                {
+                    if(drugi_igrac[i][k+1]==254 || drugi_igrac[i][k+1]==30 || drugi_igrac[i][k+1]==17)
+                        x++;
+                    drugi_igrac[i][k+1]=335;
+                    drugi_igrac_sakriveno[i][k+1]=335;
+                }
+                break;
+        }
+        srand(time(NULL));
+        y=rand()%3;
+        switch(y)
+        {
+            case 0:
+                for(i=r;i>0;i--)
+                {
+                    if(drugi_igrac[i][k-1]==254 || drugi_igrac[i][k-1]==30 || drugi_igrac[i][k-1]==17)
+                        x++;
+                    drugi_igrac[i][k-1]=335;
+                    drugi_igrac_sakriveno[i][k-1]=335;   
+                }
+                break;
+            case 1:
+                for(i=r;i>0;i--)
+                {
+                    if(drugi_igrac[i][k]==254 || drugi_igrac[i][k]==30 || drugi_igrac[i][k]==17)
+                        x++;
+                    drugi_igrac[i][k]=335;
+                    drugi_igrac_sakriveno[i][k]=335;
+                }
+                break;
+            case 2:
+                for(i=r;i>0;i--)
+                {
+                    if(drugi_igrac[i][k+1]==254 || drugi_igrac[i][k+1]==30 || drugi_igrac[i][k+1]==17)
+                        x++;
+                    drugi_igrac[i][k+1]=335;
+                    drugi_igrac_sakriveno[i][k+1]=335;
+                }
+                break;
+            return x;
+        }
+    default:
+        goto a;
+        break;
+    }
+}
+kontrolna_tabla()
+{
+    system("cls");
     int c;
     c=1;
     if(c==1)
@@ -19,7 +677,7 @@ void kontrolna_tabla()
         }
     }
 }
-void gamamode()
+gamamode()
 {
     int c;
     a:
@@ -44,9 +702,9 @@ void gamamode()
         }
     }
 }
-void podesavanja()
+podesavanja()
 {}
-void Klasicno()
+Klasicno()
 {
     int c;
     a:
@@ -72,13 +730,159 @@ void Klasicno()
     }
     
 }
-void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoruzanje[l])
+Mod()
 {
-    int novac=260,x;
+    int c;
+    a:
+    system("cls");
+    printf("1.Za dva igraca\n2.Protiv kompjutera\n3.Nazad\n");
+    scanf("%d",&c);
+    switch (c)
+    {
+    case 1:
+        multiplayer_mod();
+        break;
+    case 2:
+        bot_mod();
+        break;
+    case 3:
+        gamamode();
+        break;
+    default:
+        system("cls");
+        printf("Pogresan unos.\n");
+        goto a;
+        break;
+    }
+}
+multiplayer_mod()
+{
+    int i,j,x;//brojaci
+    int rezultat,potez,potop_p=0,potop_d=0;
+    int n=13,m=13,l=7;
+    int prvi_igrac[n][m];
+    int drugi_igrac[n][m];
+    int prvi_igrac_sakriveno[n][m];
+    int drugi_igrac_sakriveno[n][m];
+    char ime_prvi_igrac[100];
+    char ime_drugi_igrac[100];
+    int prvi_igrac_naoruzanje[l];
+    int drugi_igrac_naoruzanje[l];
+    pravila_3();
+    getch();
+    system("cls");
+    printf("Unesi ime prvog igraca: ");
+    gets(ime_prvi_igrac);
+    gets(ime_prvi_igrac);
+    printf("\nUnesi ime drugog igraca: ");
+    gets(ime_drugi_igrac);
+    system("cls");
+    for(i=0;i<12;i++)
+    {
+        for(j=0;j<12;j++)
+        {
+            prvi_igrac[i][j]=88;//
+            drugi_igrac[i][j]=88;
+            prvi_igrac_sakriveno[i][j]=88;
+            drugi_igrac_sakriveno[i][j]=88;
+        }
+    }
+    printf("%s namesta brodove\n", ime_prvi_igrac);
+    ispis_table();
+    unos_brodova(n,m,prvi_igrac);
+    system("cls");
+    printf("%s kupuje naoruzanja\n", ime_prvi_igrac);
+    unos_naoruzanja(n,m,prvi_igrac,l,prvi_igrac_naoruzanje);
+    printf("Pritisni bilo koje dugme da sledeci igrac namesta brodove.\n");
+    getch();
+    system("cls");
+    printf("%s namesta brodove\n", ime_drugi_igrac);
+    ispis_table();
+    unos_brodova(n,m,drugi_igrac);
+    system("cls");
+    printf("%s kupuje naoruzanja\n", ime_drugi_igrac);
+    unos_naoruzanja(n,m,drugi_igrac,l,drugi_igrac_naoruzanje);
+    printf("Pritisni bilo koje dugme da nastavis.\n");
+    getch();
+    potez=0;
+    while(rezultat==0)
+    {
+        if(potez%2==0)
+        {
+            x=provera_mod(n,m,drugi_igrac,drugi_igrac_sakriveno,l,prvi_igrac_naoruzanje,ime_prvi_igrac);
+            switch (x)
+            {
+            case 0:
+                system("cls");
+                potop_p=potop_p+x;
+                isaisdas(n,m,drugi_igrac_sakriveno);
+                getch();
+                system("cls");
+                break;
+            default:
+                potez++;
+                system("cls");
+                potop_p=potop_p+x;
+                isaisdas(n,m,drugi_igrac_sakriveno);
+                getch();
+                system("cls");
+                break;
+            }
+            if(potop_p==20)
+            {
+                rezultat++;
+                printf("%s je pobednik\nPostava brodova od %s je\n", ime_prvi_igrac,ime_prvi_igrac);
+                isaisdas(n,m,prvi_igrac);
+                kraj();
+            }
+        }
+        else
+        {
+            x=provera_mod(n,m,prvi_igrac,prvi_igrac_sakriveno,l,drugi_igrac_naoruzanje,ime_drugi_igrac);
+            switch (x)
+            {
+            case 0:
+                system("cls");
+                potop_d=potop_d+x;
+                isaisdas(n,m,prvi_igrac_sakriveno);
+                getch();
+                system("cls");
+                break;
+            default:
+                potez++;
+                system("cls");
+                potop_d=potop_d+x;
+                isaisdas(n,m,prvi_igrac_sakriveno);
+                getch();
+                system("cls");
+                break;
+            }
+            if(potop_d==20)
+            {
+                rezultat++;
+                printf("%s je pobednik\nPostava brodova od %s je\n", ime_drugi_igrac,ime_drugi_igrac);
+                isaisdas(n,m,drugi_igrac);
+                kraj();
+            }
+        }
+        potez++;
+        if(rezultat==0)
+        {
+        	printf("%s je pogodio %d/20 broda\n",ime_prvi_igrac,potop_p);
+	        printf("%s je pogodio %d/20 broda\n",ime_drugi_igrac,potop_d);
+	        getch();
+    	}
+    }    
+}
+unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoruzanje[l])
+{
+    int novac=200,x;
     int borac=0,borac_o=2,nosac_torpeda=0,nosac_torpeda_o=2,bombarder=0,bombarder_o=2,atomski_bombarder=0,atomski_bombarder_o=1,odbrana=0,odbrana_o=3,radar=0,radar_o=1,podmornica=0,podmornica_o=1;   
     int r1,r2,p,q,y,z;
     while(novac>0)
     {
+        getch();
+        system("cls");
         printf("Unesi redni broj da dodas naoruzanje\nImas %d novca\n",novac);
         printf("-1. Borac-stanje %d-kosta 15 dinara\n\tX X X X X X X X X X\n\tX O O O O O X X X X\n\tX O O O O O X X X X\n\tX X X X X X X X X X\n",borac_o);
         printf("-2. Nosac torpeda-stanje %d-kosta 10 dinara\n\tX X X X X X X X X X\n\tO O O O O O O O O O\n\tX X X X X X X X X X\n",nosac_torpeda_o);
@@ -95,6 +899,11 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
             system("cls");
             if(borac_o!=0)
             {
+                if(novac<15)
+                {
+                    printf("Nemas novca\n");
+                    break;
+                }
                 borac++;
                 borac_o--;
                 novac=novac-15;
@@ -108,6 +917,11 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
             system("cls");
             if(nosac_torpeda_o!=0)
             {
+                if(novac<10)
+                {
+                    printf("Nemas novca\n");
+                    break;
+                }
                 nosac_torpeda++;
                 nosac_torpeda_o--;
                 novac=novac-10;
@@ -121,6 +935,11 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
             system("cls");
             if(bombarder_o!=0)
             {
+                if(novac<12)
+                {
+                    printf("Nemas novca\n");
+                    break;
+                }
                 bombarder++;
                 bombarder_o--;
                 novac=novac-12;
@@ -134,6 +953,11 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
             system("cls");
             if(atomski_bombarder_o!=0)
             {
+                if(novac<100)
+                {
+                    printf("Nemas novca\n");
+                    break;
+                }
                 atomski_bombarder++;
                 atomski_bombarder_o--;
                 novac=novac-100;
@@ -146,11 +970,16 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
         case 5:       
             if(odbrana_o!=0)
             {
+                if(novac<10)
+                {
+                    printf("Nemas novca\n");
+                    break;
+                }
                 odbrana++;
                 odbrana_o--;
                 novac=novac-10;
+                system("cls"); 
                 a:
-                getch();
                 system("cls"); 
                 if(odbrana==1)
                 {
@@ -159,6 +988,7 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
                     if(r1<1 || r1>10)
                     {
                         printf("Pogresan unos.\n");
+                        getch();
                         goto a;
                     }
                     else
@@ -166,17 +996,20 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
                         if(r2<1 || r2>10)
                         {
                             printf("Pogresan unos.\n");
+                            getch();
                             goto a;
                         } 
                     }
                     if(r1==r2)
                     {
                         printf("Pogresan unos.\nMoraju da budu razliciti redovi.\n");
+                        getch();
                         goto a;
                     }
                     if(abs(r1-r2)!=1)
                     {
                         printf("Pogresan unos.\nTreba da budu jedan do drugog.\n");
+                        getch();
                         goto a;
                     }
                     if(prvi_igrac[r1][0]!=1 && prvi_igrac[r2][0]!=1)
@@ -193,16 +1026,19 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
                     if(p==q)
                     {
                         printf("Pogresan unos.\nMoraju da budu razliciti redovi.\n");
+                        getch();
                         goto a;
                     }
                     if(abs(p-q)!=1)
                     {
                         printf("Pogresan unos.\nTreba da budu jedan do drugog.\n");
+                        getch();
                         goto a;
                     }
                     if(p==r1 || p==r2 || q==r1 || q==r2)
                     {
                         printf("Pogresan unos.\nOdbrana se preklapa.\n");
+                        getch();
                         goto a;
                     }
                     
@@ -216,16 +1052,19 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
                     if(y==z)
                     {
                         printf("Pogresan unos.\nMoraju da budu razliciti redovi.\n");
+                        getch();
                         goto a;
                     }
                     if(abs(z-y)!=1)
                     {
                         printf("Pogresan unos.\nTreba da budu jedan do drugog.\n");
+                        getch();
                         goto a;
                     }
                     if(y==r1 || y==r2 || z==r1 || z==r2 || y==p || y==q || z==p || z==q)
                     {
                         printf("Pogresan unos.\nOdbrana se preklapa.\n");
+                        getch();
                         goto a;
                     }
                     prvi_igrac[y][0]=1;
@@ -235,12 +1074,18 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
             else
             {
                 printf("Vise nema na stanju");
+                getch();
             }
             break;
         case 6:
             system("cls");
             if(radar_o!=0)
             {
+                if(novac<15)
+                {
+                    printf("Nemas novca\n");
+                    break;
+                }
                 radar++;
                 radar_o--;
                 novac=novac-15;
@@ -254,6 +1099,11 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
             system("cls");
             if(podmornica_o!=0)
             {
+                if(novac<10)
+                {
+                    printf("Nemas novca\n");
+                    break;
+                }
                 podmornica++;
                 podmornica_o--;
                 novac=novac-10;
@@ -282,32 +1132,557 @@ void unos_naoruzanja(int n,int m,int prvi_igrac[n][m],int l,int prvi_igrac_naoru
     prvi_igrac_naoruzanje[5]=radar;
     prvi_igrac_naoruzanje[6]=podmornica;
 }
-void Mod()
+provera_mod(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m],int l,int naoruzanje[l],char ime_prvi_igrac[100])
 {
-    int c;
+    int c,x=0,i,j,u;
+    int r,yyy=20,yy=20,y=1,k,ra;
     a:
     system("cls");
-    printf("1.Za dva igraca\n2.Protiv kompjutera\n3.Nazad\n");
+    printf("%s igra\n",ime_prvi_igrac);
+    isaisdas(n,m,drugi_igrac_sakriveno);
+    printf("-1.Normalno\n-2.Borac-stanje %d\n-3.Nosac torpeda-stanje %d\n-4.Bombarder-stanje %d\n-5.Atomski bombarder-stanje %d\n-6.Radar-stanje %d\n-7.Podmornica-stanje %d\n",naoruzanje[0],naoruzanje[1],naoruzanje[2],naoruzanje[3],naoruzanje[5],naoruzanje[6]);
     scanf("%d",&c);
     switch (c)
     {
     case 1:
-        multiplayer_mod();
+        system("cls");
+        isaisdas(n,m,drugi_igrac_sakriveno);
+        printf("%s igra\n", ime_prvi_igrac);
+        f:
+        printf("Unesi polje\n");
+        scanf("%d%d",&r,&y);
+        if(drugi_igrac[r][y]==335 || drugi_igrac[r][y]==79)
+        {
+            printf("Vec si gadjao to polje\n");
+            goto f;
+        }
+        if(drugi_igrac[r][y]==254 || drugi_igrac[r][y]==30 || drugi_igrac[r][y]==17)
+        {
+            printf("Pogodak.\n");
+            drugi_igrac[r][y]=335;
+            drugi_igrac_sakriveno[r][y]=335;
+            return 1;
+        }
+        else
+        {
+            printf("Promasaj.\n");
+            drugi_igrac[r][y]=335;
+            drugi_igrac_sakriveno[r][y]=335;
+            return 0;
+        }
         break;
     case 2:
-        bot_mod();
-        break;
-    case 3:
-        gamamode();
-        break;
-    default:
+        if(naoruzanje[0]==0)
+        {
+            printf("Nema na stanju.\n");
+            getch();
+            goto a;
+        }
+        naoruzanje[0]--;
+        o:
+        printf("Unesi redove koje hoces da gadjas\n");
+        scanf("%d",&y);
+        scanf("%d",&yy);
+        if(y<0 || y>10 || yy>10 || yy<0)
+        {
+            printf("Pogresan unos.\n");
+            goto o;
+        }
+        if(abs(y-yy)!=1)
+        {
+            printf("Moraju da budu red do reda.\n");
+            goto o;
+        }
+        cz:
+        printf("Unesi od koje kolone gadjas\n");
+        scanf("%d",&u);
+        if(u<0 || u>10)
+        {
+            printf("Pogresan unos.\n");
+            goto cz;
+        }
+        if(u<10 && u>6)
+        {
+            printf("Ne moze, nema dovoljno mesta\n");
+            goto cz;
+        }
         system("cls");
-        printf("Pogresan unos.\n");
+        if(drugi_igrac[y][0]==1)
+        {
+            printf("Avion je pogodjen\n");
+            return 0;
+        }
+        else
+        {
+            if(drugi_igrac[yy][0]==1)
+            {
+                printf("Avion je pogodjen\n");
+                return 0;
+            }
+            else
+            {
+                if(u==10)
+                {
+                    for(i=0;i<5;i++)
+                    {
+                        if(drugi_igrac[y][u-i]==254 || drugi_igrac[y][u-i]==30 || drugi_igrac[y][u-i]==17)
+                        {
+                            x++;
+                        }
+                    }
+                    for(i=0;i<5;i++)
+                    {
+                        if(drugi_igrac[yy][u-i]==254 || drugi_igrac[yy][u-i]==30 || drugi_igrac[yy][u-i]==17)
+                        {
+                            x++;
+                        }
+                    }
+                    drugi_igrac[y][u]=335;
+                    drugi_igrac[y][u-1]=335;
+                    drugi_igrac[y][u-2]=335;
+                    drugi_igrac[y][u-3]=335;
+                    drugi_igrac[y][u-4]=335;
+                    drugi_igrac[yy][u]=335;
+                    drugi_igrac[yy][u-1]=335;
+                    drugi_igrac[yy][u-2]=335;
+                    drugi_igrac[yy][u-3]=335;
+                    drugi_igrac[yy][u-4]=335;
+                    drugi_igrac_sakriveno[y][u]=335;
+                    drugi_igrac_sakriveno[y][u-1]=335;
+                    drugi_igrac_sakriveno[y][u-2]=335;
+                    drugi_igrac_sakriveno[y][u-3]=335;
+                    drugi_igrac_sakriveno[y][u-4]=335;
+                    drugi_igrac_sakriveno[yy][u]=335;
+                    drugi_igrac_sakriveno[yy][u-1]=335;                            
+                    drugi_igrac_sakriveno[yy][u-2]=335;
+                    drugi_igrac_sakriveno[yy][u-3]=335;
+                    drugi_igrac_sakriveno[yy][u-4]=335;
+                    isaisdas(n,m,drugi_igrac_sakriveno);
+                    return x;
+                }
+                else
+                {
+                    for(i=0;i<5;i++)
+                    {
+                        if(drugi_igrac[y][u+i]==254 || drugi_igrac[y][u+i]==30 || drugi_igrac[y][u+i]==17)
+                        {
+                            x++;
+                        }
+                    }
+                    for(i=0;i<5;i++)
+                    {
+                        if(drugi_igrac[yy][u+i]==254 || drugi_igrac[yy][u+i]==30 || drugi_igrac[yy][u+i]==17)
+                        {
+                            x++;
+                        }
+                    }
+                    drugi_igrac[y][u]=335;
+                    drugi_igrac[y][u+1]=335;
+                    drugi_igrac[y][u+2]=335;
+                    drugi_igrac[y][u+3]=335;
+                    drugi_igrac[y][u+4]=335;
+                    drugi_igrac[yy][u]=335;
+                    drugi_igrac[yy][u+1]=335;
+                    drugi_igrac[yy][u+2]=335;
+                    drugi_igrac[yy][u+3]=335;
+                    drugi_igrac[yy][u+4]=335;
+                    drugi_igrac_sakriveno[y][u]=335;
+                    drugi_igrac_sakriveno[y][u+1]=335;
+                    drugi_igrac_sakriveno[y][u+2]=335;
+                    drugi_igrac_sakriveno[y][u+3]=335;
+                    drugi_igrac_sakriveno[y][u+4]=335;
+                    drugi_igrac_sakriveno[yy][u]=335;
+                    drugi_igrac_sakriveno[yy][u+1]=335;                            
+                    drugi_igrac_sakriveno[yy][u+2]=335;
+                    drugi_igrac_sakriveno[yy][u+3]=335;
+                    drugi_igrac_sakriveno[yy][u+4]=335;
+                    isaisdas(n,m,drugi_igrac_sakriveno);
+                    return x;
+                }
+            }
+        }
+    case 3:
+        if(naoruzanje[1]==0)
+        {
+            printf("Nema na stanju.\n");
+            getch();
+            goto a;
+        }
+        naoruzanje[1]--;
+        p:
+        printf("Unesi red koji gadjas\n");
+        scanf("%d",&r);
+        if(r<1 || r>10)
+        {
+            printf("Pogresan unos\n");
+            goto p;
+        }
+        if(drugi_igrac[r][0]==1)
+        {
+            printf("Avion je pogodjen\n");
+            return 0;
+        }
+        for(i=1;i<11;i++)
+        {
+            if(drugi_igrac[r][i]==254 || drugi_igrac[r][i]==17 || drugi_igrac[r][i]==30)
+            {
+                x++;
+            }
+            drugi_igrac[r][i]=79;
+            drugi_igrac_sakriveno[r][i]=79;
+        }
+        return x;
+        break;
+    case 4:
+        if(naoruzanje[2]==0)
+        {
+            printf("Nema na stanju.\n");
+            getch();
+            goto a;
+        }
+        naoruzanje[2]--;
+        w:
+        printf("Unesi centar bombardera\n");
+        scanf("%d%d",&r,&k);
+        if(r<1 || r>10 || k>10 || k<1)
+        {
+            printf("Pogresan unos\n");
+            goto w;
+        }
+        if(drugi_igrac[r][0]==1)
+        {
+            printf("Avion je pogodjen\n");
+            return 0;
+        }
+        i=0;
+        while(i<4)
+        {
+            i++;
+            z:
+            y=0;
+            y=0;
+            y=0;
+            y=0;
+            y=0;
+            y=0;
+            srand(time(NULL));
+            y=rand()%9;
+            switch(y)
+            {
+                case 0://
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    break;
+                case 1://
+                    if(drugi_igrac[r-1][k]==254 || drugi_igrac[r-1][k]==30 || drugi_igrac[r-1][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    drugi_igrac[r-1][k]=335;
+                    drugi_igrac_sakriveno[r-1][k]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    break;
+                case 2://
+                    if(drugi_igrac[r-1][k+1]==254 || drugi_igrac[r-1][k+1]==30 || drugi_igrac[r-1][k+1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    drugi_igrac[r-1][k+1]=335;
+                    drugi_igrac_sakriveno[r-1][k+1]=335;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    break;
+                case 3://
+                    if(drugi_igrac[r][k-1]==254 || drugi_igrac[r][k-1]==30 || drugi_igrac[r][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    drugi_igrac[r][k-1]=335;
+                    drugi_igrac_sakriveno[r][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    break;
+                case 4://
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;   
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;    
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;             
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    break;
+                case 5:
+                    if(drugi_igrac[r][k+1]==254 || drugi_igrac[r][k+1]==30 || drugi_igrac[r][k+1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r-1][k+1]==254 || drugi_igrac[r-1][k+1]==30 || drugi_igrac[r-1][k+1]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    drugi_igrac[r][k+1]=335;
+                    drugi_igrac_sakriveno[r][k+1]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    drugi_igrac[r-1][k+1]=335;
+                    drugi_igrac_sakriveno[r-1][k+1]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    break;
+                case 6://
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    break;
+                case 7://
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k-1]==254 || drugi_igrac[r+1][k-1]==30 || drugi_igrac[r+1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k+1]==254 || drugi_igrac[r+1][k+1]==30 || drugi_igrac[r+1][k+1]==17)
+                        x++;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    drugi_igrac[r+1][k-1]=335;
+                    drugi_igrac_sakriveno[r+1][k-1]=335;
+                    drugi_igrac[r+1][k+1]=335;
+                    drugi_igrac_sakriveno[r+1][k+1]=335;
+                    break;
+                case 8://
+                    if(drugi_igrac[r+1][k+1]==254 || drugi_igrac[r+1][k+1]==30 || drugi_igrac[r+1][k+1]==17)
+                        x++;
+                    if(drugi_igrac[r-1][k-1]==254 || drugi_igrac[r-1][k-1]==30 || drugi_igrac[r-1][k-1]==17)
+                        x++;
+                    if(drugi_igrac[r+1][k]==254 || drugi_igrac[r+1][k]==30 || drugi_igrac[r+1][k]==17)
+                        x++;
+                    if(drugi_igrac[r][k]==254 || drugi_igrac[r][k]==30 || drugi_igrac[r][k]==17)
+                        x++;
+                    drugi_igrac[r+1][k+1]=335;
+                    drugi_igrac_sakriveno[r+1][k+1]=335;
+                    drugi_igrac[r-1][k-1]=335;
+                    drugi_igrac_sakriveno[r-1][k-1]=335;
+                    drugi_igrac[r+1][k]=335;
+                    drugi_igrac_sakriveno[r+1][k]=335;
+                    drugi_igrac[r][k]=335;
+                    drugi_igrac_sakriveno[r][k]=335;
+                    break;
+            }
+        }
+        return x;
+    case 5:
+        if(naoruzanje[3]==0)
+        {
+            printf("Nema na stanju.\n");
+            getch();
+            goto a;
+        }
+        naoruzanje[3]--;
+        h:
+        printf("Unesi centar atomskog bombardera\n");
+        scanf("%d%d",&r,&k);
+        if(r<1 || r>10 || k>10 || k<1)
+        {
+            printf("Pogresan unos\n");
+            goto h;
+        }
+        if(drugi_igrac[r][0]==1)
+        {
+            printf("Avion je pogodjen\n");
+            return 0;
+        }
+        for(i=r-2;i<r+3;i++)
+        {
+            for(j=k-2;j<k+3;j++)
+            {
+                if(drugi_igrac[i][j]==254 || drugi_igrac[i][j]==30 || drugi_igrac[i][j]==17)
+                    x++;
+                drugi_igrac[i][j]=335;
+                drugi_igrac_sakriveno[i][j]=335;
+            }
+        }
+        return  x;
+    case 6:
+        if(naoruzanje[5]==0)
+        {
+            printf("Nema na stanju.\n");
+            getch();
+            goto a;
+        }
+        naoruzanje[5]--;
+        s:
+        printf("Unesi centar radara\n");
+        scanf("%d%d",&r,&k);
+        if(r<1 || r>10 || k>10 || k<1)
+        {
+            printf("Pogresan unos\n");
+            goto s;
+        }
+        printf("Radar pokazuje:\n");
+        for(i=r-1;i<r+2;i++)
+        {
+            for(j=k-1;j<k+2;j++)
+            {
+                printf("%c",drugi_igrac[i][j]);
+            }
+            printf("\n");
+        } 
+        getch();
+        return 0;
+    case 7:
+        if(naoruzanje[6]==0)
+        {
+            printf("Nema na stanju.\n");
+            getch();
+            goto a;
+        }
+        naoruzanje[6]--;
+        m:
+        printf("Unesi centar podmornice\n");
+        scanf("%d%d",&r,&k);
+        if(r<1 || r>10 || k>10 || k<1)
+        {
+            printf("Pogresan unos\n");
+            goto m;
+        }
+        srand(time(NULL));
+
+        y=rand()%3;
+        switch(y)
+        {
+            case 0:
+                for(i=r;i<11;i++)
+                {
+                    if(drugi_igrac[i][k-1]==254 || drugi_igrac[i][k-1]==30 || drugi_igrac[i][k-1]==17)
+                        x++;
+                    drugi_igrac[i][k-1]=335;
+                    drugi_igrac_sakriveno[i][k-1]=335;
+                }
+                break;
+            case 1:
+                for(i=r;i<11;i++)
+                {
+                    if(drugi_igrac[i][k]==254 || drugi_igrac[i][k]==30 || drugi_igrac[i][k]==17)
+                        x++;
+                    drugi_igrac[i][k]=335;
+                    drugi_igrac_sakriveno[i][k]=335;
+                }
+                break;
+            case 2:
+                for(i=r;i<11;i++)
+                {
+                    if(drugi_igrac[i][k+1]==254 || drugi_igrac[i][k+1]==30 || drugi_igrac[i][k+1]==17)
+                        x++;
+                    drugi_igrac[i][k+1]=335;
+                    drugi_igrac_sakriveno[i][k+1]=335;
+                }
+                break;
+        }
+        srand(time(NULL));
+        y=rand()%3;
+        switch(y)
+        {
+            case 0:
+                for(i=r;i>0;i--)
+                {
+                    if(drugi_igrac[i][k-1]==254 || drugi_igrac[i][k-1]==30 || drugi_igrac[i][k-1]==17)
+                        x++;
+                    drugi_igrac[i][k-1]=335;
+                    drugi_igrac_sakriveno[i][k-1]=335;   
+                }
+                break;
+            case 1:
+                for(i=r;i>0;i--)
+                {
+                    if(drugi_igrac[i][k]==254 || drugi_igrac[i][k]==30 || drugi_igrac[i][k]==17)
+                        x++;
+                    drugi_igrac[i][k]=335;
+                    drugi_igrac_sakriveno[i][k]=335;
+                }
+                break;
+            case 2:
+                for(i=r;i>0;i--)
+                {
+                    if(drugi_igrac[i][k+1]==254 || drugi_igrac[i][k+1]==30 || drugi_igrac[i][k+1]==17)
+                        x++;
+                    drugi_igrac[i][k+1]=335;
+                    drugi_igrac_sakriveno[i][k+1]=335;
+                }
+                break;
+            return x;
+        }
+    default:
+        printf("Pogresan unos\n");
+        getch();
         goto a;
         break;
     }
 }
-void multiplayer()
+multiplayer()
 {
     pravila1();
     getch();
@@ -388,6 +1763,7 @@ void multiplayer()
                 rezultat++;
                 printf("%s je pobednik\nPostava brodova od %s je\n", ime_prvi_igrac,ime_prvi_igrac);
                 isaisdas(n,m,prvi_igrac);
+                kraj();
             }
         }
         else
@@ -427,12 +1803,13 @@ void multiplayer()
                 rezultat++;
                 printf("%s je pobednik\nPostava brodova od %s je\n", ime_drugi_igrac,ime_drugi_igrac);
                 isaisdas(n,m,drugi_igrac);
+                kraj();
             }
         }
        potez++;
     }
 }
-int provera(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m])
+provera(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m])
 {
     int y,potop1,red1,kolona1,potez;
     p:
@@ -1217,7 +2594,7 @@ int provera(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m])
         return 0;
     }
 }
-int unos_brodova_bot(int n,int m,int bot[n][m])
+unos_brodova_bot(int n,int m,int bot[n][m])
 {
     int i,j;
     for(i=0;i<12;i++)
@@ -1232,7 +2609,7 @@ int unos_brodova_bot(int n,int m,int bot[n][m])
     bot_brod_2(n,m,bot);
     bot_brod_1(n,m,bot);
 }
-void bot_brod_1(int n,int m,int bot[n][m])
+bot_brod_1(int n,int m,int bot[n][m])
 {
     int i,j,red,kolona,q,k,x;
     for(q=0;q<4;q++)
@@ -1256,7 +2633,7 @@ void bot_brod_1(int n,int m,int bot[n][m])
         }
     }
 }
-void bot_brod_2(int n,int m,int bot[n][m])
+bot_brod_2(int n,int m,int bot[n][m])
 {
     int i,j,red,kolona,q,k;
     srand(time(NULL));
@@ -1453,7 +2830,7 @@ void bot_brod_2(int n,int m,int bot[n][m])
         }
     }
 }
-void bot_brod_3(int n,int m,int bot[n][m])
+bot_brod_3(int n,int m,int bot[n][m])
 {
     int i,j,red,kolona,k,q;
     srand(time(NULL));
@@ -1654,7 +3031,7 @@ void bot_brod_3(int n,int m,int bot[n][m])
         }
     }
 }   
-void bot_brod_4(int n,int m,int bot[n][m])
+bot_brod_4(int n,int m,int bot[n][m])
 {
     int i,j,red,kolona;
     srand(time(NULL));
@@ -1736,7 +3113,7 @@ void bot_brod_4(int n,int m,int bot[n][m])
         }
     }
 }
-void isaisdas(int n,int m,int prvi_igrac[n][m])
+isaisdas(int n,int m,int prvi_igrac[n][m])
 {
     printf("%c   %d %d %d %d %d %d %d %d %d %d\n",0,1,2,3,4,5,6,7,8,9,10);
     printf("%d  %c %c %c %c %c %c %c %c %c %c\n",1,prvi_igrac[1][1],prvi_igrac[1][2],prvi_igrac[1][3],prvi_igrac[1][4],prvi_igrac[1][5],prvi_igrac[1][6],prvi_igrac[1][7],prvi_igrac[1][8],prvi_igrac[1][9],prvi_igrac[1][10]);
@@ -1750,7 +3127,7 @@ void isaisdas(int n,int m,int prvi_igrac[n][m])
     printf("%d  %c %c %c %c %c %c %c %c %c %c\n",9,prvi_igrac[9][1],prvi_igrac[9][2],prvi_igrac[9][3],prvi_igrac[9][4],prvi_igrac[9][5],prvi_igrac[9][6],prvi_igrac[9][7],prvi_igrac[9][8],prvi_igrac[9][9],prvi_igrac[9][10]);
     printf("%d %c %c %c %c %c %c %c %c %c %c\n",10,prvi_igrac[10][1],prvi_igrac[10][2],prvi_igrac[10][3],prvi_igrac[10][4],prvi_igrac[10][5],prvi_igrac[10][6],prvi_igrac[10][7],prvi_igrac[10][8],prvi_igrac[10][9],prvi_igrac[10][10]);
 }
-void ispis_table()
+ispis_table()
 {
     int tabla[11][11];
     tabla[0][1] = 1;
@@ -1786,7 +3163,7 @@ void ispis_table()
     printf("%d  %c %c %c %c %c %c %c %c %c %c\n", tabla[9][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
     printf("%d %c %c %c %c %c %c %c %c %c %c\n", tabla[10][0], 88, 88, 88, 88, 88, 88, 88, 88, 88, 88);
 }
-int unos_polja()
+unos_polja()
 {
     int x;
     a:
@@ -1798,7 +3175,7 @@ int unos_polja()
     }
     return x;
 }
-int unos_brodova(int n,int m,int prvi_igrac[n][m])
+unos_brodova(int n,int m,int prvi_igrac[n][m])
 {
     int i, j,br3,br2,br1; // brojaci
     int red1,red2,kolona1,kolona2;
@@ -2302,7 +3679,7 @@ int unos_brodova(int n,int m,int prvi_igrac[n][m])
         }
     }
 }
-void bot()
+bot()
 {
     pravila2();
     getch();
@@ -2366,6 +3743,7 @@ void bot()
                 system("cls");
                 printf("Igrac je pobednik\nPostava brodova od igraca je\n");
                 isaisdas(n,m,prvi_igrac_sakriveno);
+                kraj();
             }
         }
         else
@@ -2401,12 +3779,13 @@ void bot()
                 system("cls");
                 printf("Bot je pobednik\nPostava brodova od Bota je\n");
                 isaisdas(n,m,bot);
+                kraj();
             }
         }
        potez++;
     }
 }
-int provera_bot(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m])
+provera_bot(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m])
 {
     int y,potop1,red1,kolona1,potez;
     p:
@@ -3185,23 +4564,111 @@ int provera_bot(int n,int m,int drugi_igrac[n][m],int drugi_igrac_sakriveno[n][m
         return 0;
     }
 }
-void pravila1()
+unos_naoruzanja_bot(int n,int m,int bot[n][m],int l,int bot_naoruzanje[l])
+{
+    int novac=200,x;
+    int borac=0,borac_o=2,nosac_torpeda=0,nosac_torpeda_o=2,bombarder=0,bombarder_o=2,atomski_bombarder=0,atomski_bombarder_o=1,odbrana=0,odbrana_o=3,radar=0,radar_o=1,podmornica=0,podmornica_o=1;   
+    int r1,r2,p,q,y,z;
+    srand(time(NULL));
+    x=rand()%4;
+    switch (x)
+    {
+    case 0:
+        bot_naoruzanje[0]=2;
+        bot_naoruzanje[1]=2;
+        bot_naoruzanje[2]=2;
+        bot_naoruzanje[3]=1;
+        bot_naoruzanje[4]=0;
+        bot_naoruzanje[5]=1;
+        bot_naoruzanje[6]=1;
+        break;
+    case 1:
+        bot_naoruzanje[0]=2;
+        bot_naoruzanje[1]=2;
+        bot_naoruzanje[2]=2;
+        bot_naoruzanje[3]=0;
+        bot_naoruzanje[4]=3;
+        bot[1][0]=1;
+        bot[2][0]=1;
+        bot[5][0]=1;
+        bot[4][0]=1;
+        bot[10][0]=1;
+        bot[9][0]=1;
+        bot_naoruzanje[5]=1;
+        bot_naoruzanje[6]=1;
+        break;
+    case 2:
+        bot_naoruzanje[0]=2;
+        bot_naoruzanje[1]=0;
+        bot_naoruzanje[2]=2;
+        bot_naoruzanje[3]=1;
+        bot_naoruzanje[4]=3;
+        bot[1][0]=1;
+        bot[2][0]=1;
+        bot[5][0]=1;
+        bot[4][0]=1;
+        bot[10][0]=1;
+        bot[9][0]=1;
+        bot_naoruzanje[5]=1;
+        bot_naoruzanje[6]=0;
+        break;
+    case 3:
+        bot_naoruzanje[0]=2;
+        bot_naoruzanje[1]=2;
+        bot_naoruzanje[2]=2;
+        bot_naoruzanje[3]=1;
+        bot_naoruzanje[4]=1;
+        bot[1][0]=1;
+        bot[2][0]=1;
+        bot_naoruzanje[5]=1;
+        bot_naoruzanje[6]=0;
+        break;
+    default:
+        break;
+    }
+    
+}
+pravila1()
 {
     printf("Igra se na tabli 10x10.\nIma dva igraca.\nSvako ima da postavi:\n-4 broda duzine 1\n-3 broda duzine 2\n-2 broda duzine 3\n-1 brod duzine duzine 4.\nRazdaljina izmedju brodova mora biti 1.\n");
     printf("Pritisni bilo koje dugme da nastavis.\n");
 }
-void pravila2()
+pravila2()
 {
     printf("Igra se na tabli 10x10.\nImas da postavi:\n-4 broda duzine 1\n-3 broda duzine 2\n-2 broda duzine 3\n-1 brod duzine duzine 4.\nRazdaljina izmedju brodova mora biti 1.\n");
     printf("Pritisni bilo koje dugme da nastavis.\n");
 }
-void prvila_3()
+pravila_3()
 {
-    printf("Igra se na tabli 10x10.\nIma dva igraca.\nSvako ima da postavi:\n-4 broda duzine 1\n-3 broda duzine 2\n-2 broda duzine 3\n-1 brod duzine duzine 4.\nRazdaljina izmedju brodova mora biti 1.\nSvako ima da kupi naoruzanje za 260 dinara.\n");
+    printf("Igra se na tabli 10x10.\nIma dva igraca.\nSvako ima da postavi:\n-4 broda duzine 1\n-3 broda duzine 2\n-2 broda duzine 3\n-1 brod duzine duzine 4.\nRazdaljina izmedju brodova mora biti 1.\nSvako ima da kupi naoruzanje za 200 dinara.\n");
     printf("Pritisni bilo koje dugme da nastavis.\n");
 }
-void prvila_4()
+pravila_4()
 {
-    printf("Igra se na tabli 10x10.\nImas da postavi:\n-4 broda duzine 1\n-3 broda duzine 2\n-2 broda duzine 3\n-1 brod duzine duzine 4.\nRazdaljina izmedju brodova mora biti 1.\nImas da kupi naoruzanje za 260 dinara.\n");
+    printf("Igra se na tabli 10x10.\nImas da postavi:\n-4 broda duzine 1\n-3 broda duzine 2\n-2 broda duzine 3\n-1 brod duzine duzine 4.\nRazdaljina izmedju brodova mora biti 1.\nImas da kupi naoruzanje za 200 dinara.\n");
     printf("Pritisni bilo koje dugme da nastavis.\n");
+}
+kraj()
+{
+    char o[2];
+    a:
+    getch();
+    system("cls");
+    printf("Da li zelite jos jednu partiju?\n");
+    gets(o);
+    if(strcmpi(o,"da")==0)
+    {
+        kontrolna_tabla();
+    }
+    else
+    {
+        if(strcmpi(o,"ne")==0)
+        {}
+        else
+        {
+            system("cls");
+            printf("Pogresan unos.\n");
+            goto a;
+        }
+    }
 }
